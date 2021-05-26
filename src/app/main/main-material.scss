@@ -1,0 +1,26 @@
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.cart-item{
+   .content-wrap{
+      font-size: 0.85rem;
+   }
+}
+.mat-form-field{
+   width: 100% !important;
+}
+.modal-content{
+   padding: .5rem !important;
+}
+
+body .secondary-menu button.user-location, body .secondary-menu button.user-button {
+   height: 50px;
+   margin: 0 0.3rem;
+   min-width: 120px;
+   width: 120px;
+   padding: 0;
+}

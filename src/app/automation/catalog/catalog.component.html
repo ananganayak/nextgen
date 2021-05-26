@@ -1,0 +1,225 @@
+<div class="catalogmain">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-3 leftlist ">
+
+				<mat-form-field class="example-full-width">
+					<input matInput placeholder="Search Category..." [(ngModel)]="searchCatagoery">
+				</mat-form-field>
+
+				<mat-selection-list #shoes [multiple]="false">
+					<mat-list-option (click)="showInfoAll()">All</mat-list-option>
+					<mat-list-option *ngFor="let catery of category_data | justsearch:searchCatagoery " [value]="catery"
+						(click)="showInfo(catery)">
+						{{catery}}
+					</mat-list-option>
+				</mat-selection-list>
+			</div>
+
+			<div class="col-md-9">
+
+				<div class="text-right shareSearchsection">
+					<mat-form-field class="example-full-width mr-5">
+						<input matInput placeholder="Search Process..." [(ngModel)]="searchProcess">
+					</mat-form-field>
+					<button type="button" mat-raised-button color="primary" (click)="sharedProcess();">Shared Process</button>
+				</div>
+
+
+				<div class="categoryMain clearfix">
+					<p *ngIf="process_val.length == 0" class="nodata">No Data</p>
+					<!-- CATAGORY START -->
+					<div class="catgryBox" *ngFor="let process of process_val | searchProcessName:searchProcess ">
+						<div class="catgryBody clearfix">
+							<div class="catalog_result_No_and_Share">
+								<div class="catalog_result_No">
+									<button mat-raised-button color="primary"
+										(click)="sharedUser(process['process-id'],process);open(sharedUserModel, 'lg')">
+										<mat-icon>screen_share</mat-icon>
+									</button>
+									<button mat-raised-button color="primary">
+										{{process.totalExecutions}}
+									</button>
+								</div>
+							</div>
+							<div class="img">
+								<img class="" src="assets/app/img/catalog/ad/AD-User-deletion.png">
+								<!-- <img alt="{{process['process-name']}}" class="" src="assets/{{process.imgurl}}"> -->
+							</div>
+							<div class="catTitles">
+								<h2>{{process['process-name']}}</h2>
+								<p>{{process.description}}</p>
+							</div>
+						</div>
+						<div class="catgryFooter">
+							<button mat-raised-button color="primary" (click)="getHistory(process['process-id']);open(content, 'xl')">
+								<mat-icon>history</mat-icon>
+							</button>
+							<button mat-raised-button color="primary" (click)="runThis(process);open(runProcessModel, 'lg')">
+								<mat-icon>run_circle</mat-icon>
+							</button>
+						</div>
+					</div>
+					<!-- CATAGORY END -->
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- CREATE MODEL START -->
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">List of Automation</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<p *ngIf="dataSource.length == 0">No Data</p>
+		<table *ngIf="dataSource.length > 0" mat-table [dataSource]="dataSource" multiTemplateDataRows
+			class="mat-elevation-z8">
+
+			<ng-container matColumnDef="processname">
+				<th mat-header-cell *matHeaderCellDef> processname </th>
+				<td mat-cell *matCellDef="let element"> {{element.processname}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="start_date">
+				<th mat-header-cell *matHeaderCellDef> start_date </th>
+				<td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="end_date">
+				<th mat-header-cell *matHeaderCellDef> end_date </th>
+				<td mat-cell *matCellDef="let element"> {{element.end_date}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="state">
+				<th mat-header-cell *matHeaderCellDef> state </th>
+				<td mat-cell *matCellDef="let element"> {{element.state}} </td>
+			</ng-container>
+
+			<ng-container matColumnDef="action">
+				<th mat-header-cell *matHeaderCellDef> action </th>
+				<td mat-cell *matCellDef="let element" (click)="stopHistory()">
+					<mat-icon>highlight_off</mat-icon>
+				</td>
+			</ng-container>
+
+			<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+			<ng-container matColumnDef="expandedDetail">
+				<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+					<div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+						<div class="NoResultFound">
+							<div class="">
+								<p class="noreult" *ngIf="element.log == ''">No Result Found!</p>
+								<p class="gotResult" *ngIf="element.log != ''">{{element.log}}</p>
+							</div>
+						</div>
+					</div>
+				</td>
+			</ng-container>
+			<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+			<tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+				[class.example-expanded-row]="expandedElement === element" (click)="expandedElement = element">
+			</tr>
+			<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+<!-- CREATE MODEL END -->
+
+
+<!-- RUN PROCESS START -->
+<ng-template #runProcessModel let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Run Process</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+
+		<div class="runprocessMain">
+
+			<div class="runprocessFailure" *ngIf="runProcessStatus != true">
+				<p>{{runProcessID}}</p>
+				<button mat-raised-button color="success">
+					<mat-icon>unpublished</mat-icon>
+					Cancel
+				</button>
+				<button mat-raised-button color="primary" (click)="runProcessConfirm(runProcessIDOnly,'{}')">
+					<mat-icon>verified</mat-icon>
+					Confirm
+				</button>
+			</div>
+
+			<div class="runprocessSucess" *ngIf="runProcessStatus == true">
+				<mat-form-field class="example-full-width">
+					<mat-label>Text Field</mat-label>
+					<input type="text" matInput placeholder="Enter Text Field" [(ngModel)]="runProcessTextField">
+				</mat-form-field>
+
+				<br>
+				<button mat-raised-button color="success">
+					<mat-icon>unpublished</mat-icon>
+					Cancel
+				</button>
+				<button mat-raised-button color="primary" (click)="startProcess()">
+					<mat-icon>verified</mat-icon>
+					Start Process
+				</button>
+			</div>
+
+
+		</div>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+<!-- RUN PROCESS END -->
+
+
+
+<!-- SHARED USER START -->
+<ng-template #sharedUserModel let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">User List</h4>
+		<button type="button" class="close" mat-mini-fab color="warn" aria-label="Close"
+			(click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+
+		<p *ngIf="userGroupList.length == 0">Loading...</p>
+
+		<span class="example-list-section" *ngIf="userGroupList.length > 0">
+			<ul>
+				<li *ngFor="let usr of this.userGroupList">
+					<mat-checkbox [(ngModel)]="usr.isChecked" (ngModelChange)="updateAllComplete(usr, this.userGroupList)">
+						{{usr.user_id}}
+					</mat-checkbox>
+				</li>
+			</ul>
+		</span>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" mat-raised-button color="primary" (click)="saveUserList(); modal.close('Save click')"
+			[disabled]="!enbleShareBtn">Share</button>
+		<button type="button" mat-raised-button color="warn" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+<!-- SHARED USER END -->

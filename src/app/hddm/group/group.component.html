@@ -1,0 +1,135 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+            <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+               <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchgroup">
+            </div>
+            <mat-card-actions class="mat-pad-none margin-none">
+               <button mat-raised-button mat-button-sm color="primary" (click)="groupAddModalFn(groupAddModal)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+            </mat-card-actions>
+         </div>
+      </div>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>Group Details</h4>
+            </div><span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content pad-t-none">
+         <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <!-- <th>S.No</th> -->
+                     <th>Group Name</th>
+                     <th>Description</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let gp of grouplist | filter:searchgroup">
+                     <!-- <td>{{i + 1}}</td> -->
+                     <td>{{gp[1]}}</td>
+                     <td>{{gp[2]}}</td>
+                     <td>
+                       <div class="example-button-row">
+                           <button mat-icon-button color="primary" (click)="btnUpdateGroupFn(groupUpateModal, gp[0])">
+                             <mat-icon>edit</mat-icon>
+                           </button>
+                           <button mat-icon-button color="primary" (click)="btnDeleteGroupFn(gp[0])">
+                             <mat-icon>delete</mat-icon>
+                           </button>
+                         </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </mat-card>
+</div>
+
+<!-- Cred Add Modal start-->
+<ng-template #groupAddModal let-modal>
+  <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">Group Add Modal</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+     <form [formGroup]="groupaddform" (ngSubmit)="submitGroupAdd()">
+      <mat-form-field class="example-full-width">
+         <mat-label>Group Name</mat-label>
+         <input matInput placeholder="Enter CRED Name" [(ngModel)]="txtAddGrpName"  formControlName="txtaddgrpname">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="groupaddform.controls['txtaddgrpname'].hasError('required') && groupaddform.controls['txtaddgrpname'].touched" class="warn-text">
+         Enter the Group Name.
+      </small>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Group Description</mat-label>
+         <input matInput placeholder="Enter User name" [(ngModel)]="txtAddGrpDes" formControlName="txtaddgrpdescription">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="groupaddform.controls['txtaddgrpdescription'].hasError('required') && groupaddform.controls['txtaddgrpdescription'].touched" class="warn-text">
+         Enter the Group Description.
+      </small>
+      <br>
+      <mat-container *ngFor="let row of groupMachineList; index as i">
+          <mat-checkbox [value]="row[0]" name="chkval{{i}}">{{row[1]}}</mat-checkbox>
+          <br>
+          <br>
+      </mat-container>
+      <br>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!groupaddform.valid" >Create User</button>
+   </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- Cred Update model end -->
+
+<!-- Cred Update Modal start-->
+<ng-template #groupUpateModal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Group Update Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="groupdateform" (ngSubmit)="submitGroupUpFn()">
+         <mat-form-field class="example-full-width">
+            <mat-label>Group Name</mat-label>
+            <input matInput placeholder="Enter Group Name" [(ngModel)]="groupUpDetails.group_name" formControlName="txtupgrpname">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="groupdateform.controls['txtupgrpname'].hasError('required') && groupdateform.controls['txtupgrpname'].touched" class="warn-text">
+            Enter the Group Name.
+         </small>
+         <br>
+         <mat-form-field class="example-full-width">
+            <mat-label>Group Description</mat-label>
+            <input matInput placeholder="Enter User name" [(ngModel)]="groupUpDetails.group_description" formControlName="txtupgrpdescription">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="groupdateform.controls['txtupgrpdescription'].hasError('required') && groupdateform.controls['txtupgrpdescription'].touched" class="warn-text">
+            Enter the Group Description.
+         </small>
+         <br>
+         <mat-container *ngFor="let row of groupUpMachineDetails; index as i">
+             <mat-checkbox name="update_chkval{{i}}" [checked]="row[2] == 'yes'">{{row[1]}}</mat-checkbox>
+             <br>
+             <br>
+         </mat-container>
+         <br>
+         <button mat-raised-button color="primary"  type="submit" [disabled]="!groupdateform.valid" >Create User</button>
+      </form>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+ </ng-template>
+ <!-- Cred Update model end -->

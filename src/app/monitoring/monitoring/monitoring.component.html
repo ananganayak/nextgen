@@ -1,0 +1,54 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: left;">
+         <div class="mrgn-b-md add-user-btn" fxLayoutAlign="start center">
+            <mat-form-field class="mrgn-l-md">
+               <mat-select placeholder="Select Host Group" (ngModelChange)="getHostName($event)"
+                  [(ngModel)]="selhostgrp">
+                  <mat-option [value]=""> -- select -- </mat-option>
+                  <mat-option *ngFor="let hgl of hostGroupList" [value]="hgl">{{hgl}}</mat-option>
+               </mat-select>
+            </mat-form-field>
+            <mat-form-field class="mrgn-l-md" *ngIf="hostIsActive == true">
+               <mat-select placeholder="Select Host" (ngModelChange)="getHostGirdDetail($event)" [(ngModel)]="selhost">
+                  <mat-option *ngFor="let hl of hostList" [value]="hl">{{hl}}</mat-option>
+               </mat-select>
+            </mat-form-field>
+         </div>
+      </div>
+
+
+      <div class="gene-card-content pad-t-none" *ngIf="showTable == true">
+         <div class="table-responsive" style="margin-top: 25px;">
+
+            <p *ngIf="showNodata == true">No Data...</p>
+
+            
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <th>S.No</th>
+                     <th sortable="service">Service</th>
+                     <th sortable="service">Status</th>
+                     <th>Status Information</th>
+                     <th>Last Check</th>
+                     <th sortable="since">Since</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let row of hostGridList; index as i">
+                     <td>{{i + 1}}</td>
+                     <td>{{row[1]}}</td>
+                     <td>{{row[2]}}</td>
+                     <td>{{row[3]}}</td>
+                     <td>{{row[4]}}</td>
+                     <td>{{row[5]}}</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+
+
+   </mat-card>
+</div>

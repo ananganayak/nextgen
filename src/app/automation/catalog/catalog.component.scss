@@ -1,0 +1,168 @@
+.catalogmain {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 15px;
+  margin: 15px;
+}
+
+.catgryBox {
+  float: left;
+  width: 31.9%;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.catgryFooter {
+  border-top: 1px solid #ccc;
+
+  .btn {
+    width: 45%;
+    background-color: aqua;
+    margin-left: 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 0px;
+    font-size: 14px;
+  }
+}
+
+.catgryBody {
+  position: relative;
+
+  .img img {
+    width: 80px;
+  }
+
+  .catalog_result_No {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+
+    .btn {
+      padding: 5px 10px;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+  }
+
+}
+
+.catTitles {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  h2 {
+    font-size: 13px;
+  }
+
+  p {
+    margin: 0px;
+    font-size: 12px;
+    height: 20px;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+  }
+}
+
+
+.nodata {
+  text-align: center;
+  padding: 15px 0px;
+  background-color: #fdf6fd;
+  border-radius: 4px;
+  border: 1px solid #ddbcdc;
+  margin-top: 50px;
+}
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: #f5f5f5;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.runprocessFailure {
+  p {}
+}
+
+.NoResultFound {
+  display: block;
+  width: 100%;
+
+  p.noreult {
+    background-color: #f9dddd;
+    text-align: center;
+    border: 1px solid #f58282;
+    padding: 10px 0;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+
+  .gotResult {
+    background-color: #bfffc1;
+    text-align: center;
+    border: 1px solid #4de952;
+    padding: 10px 0;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+.shareSearchsection {
+  .mat-primary {
+    margin-left: 20px !important;
+  }
+}

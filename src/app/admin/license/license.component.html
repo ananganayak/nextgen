@@ -1,0 +1,29 @@
+
+<h2>Licence Key </h2>
+
+<div class="license">
+
+
+	<mat-form-field appearance="fill">
+		<input matInput type="text" [disabled]="hide ? 'true' : 'false'"  [(ngModel)]="licenseData">
+	</mat-form-field>
+
+	<div class="BtnSection">
+		<button mat-raised-button color="primary" [cdkCopyToClipboard]="licenseData" (click)="copyToClip()" [attr.aria-label]="'Hide password'"
+			[attr.aria-pressed]="hide">
+			Copy
+		</button>
+
+		<button mat-raised-button color="primary" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+			[attr.aria-pressed]="hide">
+			Edit
+		</button>
+
+		<button mat-raised-button color="primary" (click)="update()" [attr.aria-label]="'Hide password'"
+			[attr.aria-pressed]="hide">
+			Update
+		</button>
+
+	</div>
+
+</div>

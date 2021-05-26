@@ -1,0 +1,156 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+	<mat-card>
+	   <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+		  <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+			 <mat-card-actions class="mat-pad-none margin-none">
+				<button mat-raised-button mat-button-sm color="primary" (click)="appAddNewRoleFn(rolesAddModal)" >ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+			 </mat-card-actions>
+		  </div>
+	   </div>
+	   <div class="gene-card-title">
+		  <div fxLayout="row" fxLayoutAlign="start center">
+			 <div fxLayout="column">
+				<h4>Roles</h4>
+			 </div><span fxFlex></span>
+		  </div>
+		  <mat-divider></mat-divider>
+	   </div>
+	   <div class="gene-card-content pad-t-none">
+		  <div class="table-responsive" style="margin-top: 25px;">
+			 <table class="table table-bordered table-middle th-fw-light mb-0">
+				<thead style="background-color: #efefef;">
+				   <tr>
+					  <th>S.No</th>
+					  <th>Roles</th>
+					  <th>Actions</th>
+				   </tr>
+				</thead>
+				<tbody>
+				   <tr *ngFor="let rname of roleNames; index as i">
+					  <td>{{i + 1}}</td>
+					  <td>{{rname}}</td>
+					  <td>
+						 <div class="example-button-row">
+							<button mat-icon-button color="primary" >
+							  <mat-icon (click)="getRolesCondition(rname, rolesUpateModal)">edit</mat-icon>
+							</button>
+							<button mat-icon-button color="primary" (click)="deleteRoles(rname)">
+							  <mat-icon>delete</mat-icon>
+							</button>
+						 </div>
+					  </td>
+				   </tr>
+				</tbody>
+			 </table>
+		  </div>
+	   </div>
+	</mat-card>
+ </div>
+
+ <!-- Roles Update Modal start-->
+<ng-template #rolesAddModal let-modal>
+	<div class="modal-header">
+	   <h4 class="modal-title" id="modal-basic-title">Role Add Modal</h4>
+	   <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+		  <span aria-hidden="true">&times;</span>
+	   </button>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="form-group">
+					<lable>Role Name</lable>
+					<input type="text" class="form-control" placeholder="Roles Name" [(ngModel)]="addRoleName">
+				</div>
+				<br>
+				<br>
+			</div>
+			<div class="col-lg-12">
+				<div class="">
+					<table class="table table-bordered" >
+						<thead>
+							<tr>
+								<th scope="col">Modules </th>
+								<th scope="col">Read</th>
+								<th scope="col">Write</th>
+								<th scope="col">Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let rolesTbs of rolesTableData" data-name="{{rolesTbs}}">
+								<td> {{rolesTbs}} </td>
+								<td>
+									<mat-checkbox class="example-margin" name="chkRead{{rolesTbs}}"></mat-checkbox>
+								</td>
+								<td>
+									<mat-checkbox class="example-margin" name="chkWrite{{rolesTbs}}" ></mat-checkbox>
+								</td>
+								<td>
+									<mat-checkbox class="example-margin" name="chkDelete{{rolesTbs}}"></mat-checkbox>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button mat-raised-button color="primary" (click)="submitAddRolesFn()">Submit</button>
+	  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+	</div>
+  </ng-template>
+  <!-- Cred Update model end -->
+
+ <!-- Roles Update Modal start-->
+<ng-template #rolesUpateModal let-modal>
+	<div class="modal-header">
+	   <h4 class="modal-title" id="modal-basic-title">Role Update Modal</h4>
+	   <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+		  <span aria-hidden="true">&times;</span>
+	   </button>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="form-group" style="margin-bottom: 15px;">
+					<lable>Role Name</lable>
+					<input type="text" class="form-control" placeholder="Roles Name" [(ngModel)]="displayRoleName" disabled>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<div class="table-responsive">
+					<table class="table table-bordered" >
+						<thead>
+							<tr>
+								<th scope="col">Modules </th>
+								<th scope="col">Read</th>
+								<th scope="col">Write</th>
+								<th scope="col">Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let rolesTbs of upCheckedData" data-name="{{rolesTbs}}">
+								<td> {{rolesTbs.Name}} </td>
+								<td>
+									<mat-checkbox class="example-margin" name="chkUpRead{{rolesTbs.Name}}" [checked]="rolesTbs.value[0] == 'R'"></mat-checkbox>
+								</td>
+								<td>
+									<mat-checkbox class="example-margin" name="chkUpWrite{{rolesTbs.Name}}" [checked]="rolesTbs.value[1] == 'W'"></mat-checkbox>
+								</td>
+								<td>
+									<mat-checkbox class="example-margin" name="chkUpDelete{{rolesTbs.Name}}" [checked]="rolesTbs.value[2] == 'D'"></mat-checkbox>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button mat-raised-button color="primary" (click)="submitUpRolesFn()">Submit</button>
+	  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+	</div>
+  </ng-template>
+  <!-- Cred Update model end -->

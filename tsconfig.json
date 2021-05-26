@@ -1,0 +1,18 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./src/tsconfig.app.json"
+    },
+    {
+      "path": "./src/tsconfig.spec.json"
+    }
+	],
+	"compilerOptions": {
+    "paths": {
+      "@angular/*": [
+        "../node_modules/@angular/*"
+      ]
+    }
+  }
+}

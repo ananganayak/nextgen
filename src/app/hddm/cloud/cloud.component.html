@@ -1,0 +1,180 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+            <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+               <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchcloud">
+            </div>
+            <mat-card-actions class="mat-pad-none margin-none">
+               <button mat-raised-button mat-button-sm color="primary" (click)="cloudAddModalFn(cloudAddModal)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+            </mat-card-actions>
+         </div>
+      </div>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>Cloud Details</h4>
+            </div><span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content pad-t-none">
+         <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <!-- <th>S.No</th> -->
+                     <th>Cloud Name</th>
+                     <th>Cloud IP</th>
+                     <th>Cloud Type</th>
+                     <th>Credential</th>
+                     <th>Actions</th>
+                     <th>Mapping</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let cloud of cloudlist | filter : searchcloud">
+                     <!-- <td>{{i + 1}}</td> -->
+                     <td>{{cloud[1]}}</td>
+                     <td>{{cloud[2]}}</td>
+                     <td>{{cloud[3]}}</td>
+                     <td>{{cloud[4]}}</td>
+                     <td>
+                       <div class="example-button-row" >
+                           <button mat-icon-button color="primary" (click)="updateModal(cloudUpdateModal, cloud)">
+                             <mat-icon >edit</mat-icon>
+                           </button>
+                           <button mat-icon-button color="primary" (click)="Deletefn(cloud[0])">
+                             <mat-icon>delete</mat-icon>
+                           </button>
+                         </div>
+                     </td>
+                     <td>
+                       <button mat-icon-button color="primary">
+                          <mat-icon>swap_horiz</mat-icon>
+                        </button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </mat-card>
+</div>
+
+<!-- Cloud update Modal start-->
+<ng-template #cloudUpdateModal let-modal>
+  <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">CRED Update Modal</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+   <form [formGroup]="cloudupfrom" (ngSubmit)="submitCloudUpdate()">
+      <mat-form-field>
+         <mat-label>Cloud Name</mat-label>
+         <input matInput placeholder="Enter CRED Name" [(ngModel)]="cloudUpName" formControlName="cloudUpformName">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloudupfrom.controls['cloudUpformName'].hasError('required') && cloudupfrom.controls['cloudUpformName'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field>
+         <mat-label>Cloud IP</mat-label>
+         <input matInput placeholder="Enter User name" [(ngModel)]="cloudUpIp" formControlName="cloudUpformIp">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloudupfrom.controls['cloudUpformIp'].hasError('required') && cloudupfrom.controls['cloudUpformIp'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field>
+         <mat-label>Cloud Type</mat-label>
+         <select matNativeControl required [(ngModel)]="cloudUpType" formControlName="cloudUpformType"> 
+            <option value="" selected>--Select--</option>
+            <option value="vmware" selected>VMWare</option>
+            <!-- <option *ngFor="let row of credtypelov" [value]="row.value">{{row.value}}</option> -->
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloudupfrom.controls['cloudUpformType'].hasError('required') && cloudupfrom.controls['cloudUpformType'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field>
+         <mat-label>Credential</mat-label>
+         <select matNativeControl required [(ngModel)]="cloudUpCredList" formControlName="cloudUpformCredList"> 
+            <option value="" selected>--Select--</option>
+            <option *ngFor="let row of cloudcredlist" [value]="row[0]">{{row[1]}}</option>
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloudupfrom.controls['cloudUpformCredList'].hasError('required') && cloudupfrom.controls['cloudUpformCredList'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!cloudupfrom.valid" >Save</button>
+   </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- Cloud Update model end -->
+
+
+<!-- Cloud ADD Modal Start-->
+<ng-template #cloudAddModal let-modal>
+  <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">Cloud Add Modal</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+     <form [formGroup]="cloupaddfrom" (ngSubmit)="submitCloudAdd()">
+      <mat-form-field>
+         <mat-label>Cloud Name</mat-label>
+         <input matInput placeholder="Enter CRED Name" [(ngModel)]="cloudAddName" formControlName="cloudAddformName">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloupaddfrom.controls['cloudAddformName'].hasError('required') && cloupaddfrom.controls['cloudAddformName'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field>
+         <mat-label>Cloud IP</mat-label>
+         <input matInput placeholder="Enter User name" [(ngModel)]="cloudAddIp" formControlName="cloudAddformIp">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloupaddfrom.controls['cloudAddformIp'].hasError('required') && cloupaddfrom.controls['cloudAddformIp'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field>
+         <mat-label>Cloud Type</mat-label>
+         <select matNativeControl required [(ngModel)]="cloudAddType" formControlName="cloudAddfromType"> 
+            <option value="" selected>--Select--</option>
+            <option value="vmware" selected>VMWare</option>
+            <!-- <option *ngFor="let row of credtypelov" [value]="row.value">{{row.value}}</option> -->
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloupaddfrom.controls['cloudAddfromType'].hasError('required') && cloupaddfrom.controls['cloudAddfromType'].touched" class="warn-text">
+         Select the Value.
+      </small>
+      <br>
+      <mat-form-field>
+         <mat-label>Credential</mat-label>
+         <select matNativeControl required [(ngModel)]="cloudAddCredList" formControlName="cloudAddformCredList"> 
+            <option value="" selected>--Select--</option>
+            <option *ngFor="let row of cloudcredlist" [value]="row[0]">{{row[1]}}</option>
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="cloupaddfrom.controls['cloudAddformCredList'].hasError('required') && cloupaddfrom.controls['cloudAddformCredList'].touched" class="warn-text">
+         Select the Value.
+      </small>
+      <br>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!cloupaddfrom.valid" >Save</button>
+   </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- Cloud ADD Model End -->

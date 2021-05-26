@@ -1,0 +1,310 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+       <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+          <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+             <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+                <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchpolicy">
+             </div>
+             <mat-card-actions class="mat-pad-none margin-none">
+                <button mat-raised-button mat-button-sm color="primary" (click)="policyAddModalFn(policyAddModal)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+             </mat-card-actions>
+          </div>
+       </div>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+             <div fxLayout="column">
+                <h4>Policy Engine</h4>
+             </div><span fxFlex></span>
+          </div>
+          <!-- <mat-divider></mat-divider> -->
+       </div>
+       <div class="gene-card-content pad-t-none">
+          <div class="table-responsive" style="margin-top: 25px;">
+             <table class="table table-bordered table-middle th-fw-light mb-0">
+                <thead style="background-color: #efefef;">
+                   <tr>
+                      <!-- <th>S.No</th> -->
+                      <th>Rule Description</th>
+                      <th>HostName</th>
+                      <th>Action</th>
+                      <th>Action Command</th>
+                      <th>Arguments</th>
+                      <th>Created By</th>
+                      <th>Status</th>
+                   </tr>
+                </thead>
+                <!-- <tbody>
+                   <tr *ngFor="let policy of polocylist "> 
+                      <td>{{cloud[1]}}</td>
+                      <td>{{cloud[2]}}</td>
+                      <td>{{cloud[3]}}</td>
+                      <td>{{cloud[4]}}</td>
+                      <td>                  
+                      </td>                
+                   </tr>
+                </tbody> -->
+             </table>
+          </div>
+       </div>
+    </mat-card>
+ </div>
+ 
+
+ 
+ <!-- Policy engine Start-->
+ <ng-template #policyAddModal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-1">Policy Engine</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="container">
+     
+         
+   <div class="modal-body">
+     
+      <form [formGroup]="policyform" [formGroup]="policyForm" (ngSubmit)="submitPolicyAdd(policyForm.value)">
+         <div class="row">
+         <div class="col-3">
+       <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Description" formControlName="descriptionformName">
+       </mat-form-field>
+    </div>
+       <div class="col-3">
+       <mat-form-field>
+          <mat-label>HostName</mat-label>
+          <input matInput placeholder="Enter Host Name"formControlName="hostName">
+       </mat-form-field>
+      </div>
+       <br>
+       <div class="col-3">
+       <mat-form-field>
+          <mat-label>Group By</mat-label>
+          <select matNativeControl required formControlName="groupType"> 
+             <option value="all" selected>All</option>
+             <option value="any" selected>Any</option>
+          
+          </select>
+       </mat-form-field>
+      </div>
+       </div>
+       
+       <br>       
+
+          <table class="table table-stripped">
+             <thead>
+                <tr>
+                   <th>Key</th>
+                   <th>Condition</th>
+                   <th>Value</th>
+                   <th>action</th>
+                </tr>
+             </thead>
+             <tbody>
+                <tr>
+                   <td>
+                     <mat-form-field>
+                        <mat-label>Select Key</mat-label>
+                        <select matNativeControl required class="form-control" formControlName="selectKey"> 
+                           <option value="" selected>--Select--</option>
+                           <option value="hostname" selected>HostName</option>
+                           <option value="eventdescription" selected>Evant Description</option>
+                           <option value="eventcomponent" selected>EventComponent</option>
+                           <option value="eventseverity" selected>EventSeverity</option>
+                           <option value="os" selected>Os</option>
+                           <option value="Platform" selected>platform</option>
+                        </select>
+                     </mat-form-field>
+                   </td>
+
+                   <td>
+                     <mat-form-field>
+                        <mat-label>Conditions</mat-label>
+                        <select matNativeControl required class="form-control" formControlName="conditions"> 
+                           <option value="" selected>--Select--</option>
+                           <option value="equals" selected>Equqls</option>
+                           <option value="notequals" selected>NotEquals</option>
+                           <option value="contains" selected>contains</option>                       
+                        </select>
+                     </mat-form-field>
+                   </td>
+                   <td>
+                     <mat-form-field>
+                        <mat-label>Value</mat-label>
+                        <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                     </mat-form-field>
+
+                   </td>                  
+                   <td>
+                     <button type="submit" class="add" aria-label="Add">
+                        Add
+                     </button>
+                   </td>
+                </tr>
+                <tr *ngFor="let policy of addedPolicies">
+                   <td>
+                      {{policy.selectKey}}
+                   </td>
+                   <td>{{policy.conditions}}</td>
+                   <td>{{policy.value}}</td>
+                </tr>
+             </tbody>
+          </table>
+
+            <table class="table table-stripped" *ngIf="visibleForm === 'email'">
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>TO</th>
+                     <th>CC</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                     <mat-form-field>
+                        <select matNativeControl required class="form-control" [(ngModel)]="selectedOption"
+                        [ngModelOptions]="{standalone: true}" (change)="onSelectionChanged()"> 
+                           <option value="" selected>--Select--</option>
+                           <option value="email" selected>EMAIL</option>
+                           <option value="local" selected>LOCAL SCRIPT</option>
+                           <option value="remote" selected>REMOTE SCRIPT</option>
+                           <option value="sms" selected>SMS</option>
+                        </select>
+                     </mat-form-field>
+                     </td>
+
+                     <td>
+                     <mat-form-field>
+                        <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                     </mat-form-field>
+                     </td>
+                     <td>
+                     <mat-form-field>
+                        <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                     </mat-form-field>
+
+                     </td>                  
+                  </tr>
+               </tbody>
+            </table>      
+            
+            <table class="table table-stripped" *ngIf="visibleForm === 'local'">
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>Command</th>
+                     <th>Argument</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                       <mat-form-field>
+                          <mat-label>Select</mat-label>
+                          <select matNativeControl required class="form-control" [(ngModel)]="selectedOption"
+                          [ngModelOptions]="{standalone: true}" (change)="onSelectionChanged()"> 
+                             <option value="" selected>--Select--</option>
+                             <option value="email" selected>EMAIL</option>
+                             <option value="local" selected>LOCAL SCRIPT</option>
+                             <option value="remote" selected>REMOTE SCRIPT</option>
+                             <option value="sms" selected>SMS</option>
+                          </select>
+                       </mat-form-field>
+                     </td>
+   
+                     <td>
+                       <mat-form-field>
+                        <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                       </mat-form-field>
+                     </td>
+                     <td>
+                       <mat-form-field>
+                          <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                       </mat-form-field>
+   
+                     </td>                  
+                  </tr>
+               </tbody>
+            </table>    
+            
+            <table class="table table-stripped" *ngIf="visibleForm === 'remote'">
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>Command</th>
+                     <th>Argument</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                     <mat-form-field>
+                        <select matNativeControl required class="form-control" [(ngModel)]="selectedOption"
+                        [ngModelOptions]="{standalone: true}" (change)="onSelectionChanged()"> 
+                           <option value="" selected>--Select--</option>
+                           <option value="email" selected>EMAIL</option>
+                           <option value="local" selected>LOCAL SCRIPT</option>
+                           <option value="remote" selected>REMOTE SCRIPT</option>
+                           <option value="sms" selected>SMS</option>
+                        </select>
+                     </mat-form-field>
+                     </td>
+
+                     <td>
+                     <mat-form-field>
+                        <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                     </mat-form-field>
+                     </td>
+                     <td>
+                     <mat-form-field>
+                        <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                     </mat-form-field>
+
+                     </td>                  
+                  </tr>
+               </tbody>
+            </table>   
+
+            <table class="table table-stripped" *ngIf="visibleForm === 'sms'">
+               <thead>
+                  <tr>
+                     <th>Name</th>
+                     <th>Numbers</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                     <mat-form-field>
+                        <select matNativeControl required class="form-control" [(ngModel)]="selectedOption"
+                        [ngModelOptions]="{standalone: true}" (change)="onSelectionChanged()"> 
+                           <option value="" selected>--Select--</option>
+                           <option value="email" selected>EMAIL</option>
+                           <option value="local" selected>LOCAL SCRIPT</option>
+                           <option value="remote" selected>REMOTE SCRIPT</option>
+                           <option value="sms" selected>SMS</option>
+                        </select>
+                     </mat-form-field>
+                     </td>
+
+                     <td>
+                     <mat-form-field>
+                        <input matInput placeholder="Enter Value" class="form-control" formControlName="value" >
+                     </mat-form-field>
+                     </td>           
+                  </tr>
+               </tbody>
+            </table>                          
+         </form>
+
+   </div>
+
+</div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+ </ng-template>
+ <!-- Policy Engine End -->

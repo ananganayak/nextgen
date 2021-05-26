@@ -1,0 +1,198 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+       <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+          <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+             <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+                <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchsoftware">
+             </div>
+             <mat-card-actions class="mat-pad-none margin-none">
+                          
+               <button mat-raised-button mat-button-sm color="primary" (click)="softwareAddModalFn(softwareAddModal)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+             </mat-card-actions>
+          </div>
+       </div>
+       <div class="gene-card-title">`
+          <div fxLayout="row" fxLayoutAlign="start center">
+             <div fxLayout="column">
+                <h4>Software Details</h4>
+             </div><span fxFlex></span>
+          </div>
+          <mat-divider></mat-divider>
+       </div>
+       <div class="gene-card-content pad-t-none">
+          <div class="table-responsive" style="margin-top: 25px;">
+             <table class="table table-bordered table-middle th-fw-light mb-0">
+                <thead style="background-color: #efefef;">
+                   <tr>
+                      <!-- <th>S.No</th> -->
+                      <th>Software Name</th>
+                      <th>Software Class</th>
+                      <th>Software Sub Class</th>
+                      <th>Remediate</th>
+                      <th>Attributes</th>
+                      <th>Actions</th>
+                   </tr>
+                </thead>
+                <!-- <tbody>
+                   <tr *ngFor="let software of softwarelist | filter : searchsoftware">
+                    
+                      <td>{{Software[1]}}</td>
+                      <td>{{Software[2]}}</td>
+                      <td>{{Software[3]}}</td>
+                      <td>{{Software[4]}}</td>
+                      <td>{{Software[5]}}</td>
+
+                      <td>
+                        <div class="example-button-row" >
+                            <button mat-icon-button color="primary" >
+                             
+                           
+                              <mat-icon >edit</mat-icon>
+                            </button>
+                           
+                            <button mat-icon-button color="primary" >
+
+                              <mat-icon>delete</mat-icon>
+                            </button>
+                          </div>
+                      </td>
+                      <td>
+                        
+                      </td>
+                   </tr>
+                </tbody> -->
+             </table>
+          </div>
+       </div>
+    </mat-card>
+ </div>
+ 
+ <!-- software update Modal start-->
+ <ng-template #softwareUpdateModal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Software Update Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+    <form [formGroup]="softwareupfrom" (ngSubmit)="submitCloudUpdate()">
+       <mat-form-field>
+          <mat-label>software Name</mat-label>
+          <input matInput placeholder="Enter CRED Name" [(ngModel)]="softwareUpName" formControlName="softwareUpformName">
+       </mat-form-field>
+       <!-- <small class="gene-block" *ngIf="softwareupfrom.controls['softwarUpformName'].hasError('required') && softwareupfrom.controls['softwarUpformName'].touched" class="warn-text">
+          Enter the Value.
+       </small> -->
+       <br>
+       <mat-form-field>
+          <mat-label>software IP</mat-label>
+          <input matInput placeholder="Enter User name" [(ngModel)]="softwareUpIp" formControlName="softwareUpformIp">
+       </mat-form-field>
+       <!-- <small class="gene-block" *ngIf="softwareupfrom.controls['softwareUpformIp'].hasError('required') && softwareupfrom.controls['cloudUpformIp'].touched" class="warn-text">
+          Enter the Value.
+       </small> -->
+       <br>
+       <mat-form-field>
+          <mat-label>Cloud Type</mat-label>
+          <select matNativeControl required [(ngModel)]="softwareUpType" formControlName="cloudUpformType"> 
+             <option value="" selected>--Select--</option>
+             <option value="vmware" selected>VMWare</option>
+             <!-- <option *ngFor="let row of credtypelov" [value]="row.value">{{row.value}}</option> -->
+          </select>
+       </mat-form-field>
+       <!-- <small class="gene-block" *ngIf="softwareupfrom.controls['softwareUpformType'].hasError('required') && softwareupfrom.controls['cloudUpformType'].touched" class="warn-text">
+          Enter the Value.
+       </small> -->
+       <br>
+       <mat-form-field>
+          <mat-label>Credential</mat-label>
+          <select matNativeControl required [(ngModel)]="softwareUpCredList" formControlName="cloudUpformCredList"> 
+             <option value="" selected>--Select--</option>
+             <option *ngFor="let row of softwarecredlist" [value]="row[0]">{{row[1]}}</option>
+          </select>
+       </mat-form-field>
+       <!-- <small class="gene-block" *ngIf="softwareupfrom.controls['softwareUpformCredList'].hasError('required') && softwareupfrom.controls['cloudUpformCredList'].touched" class="warn-text">
+          Enter the Value.
+       </small> -->
+       <br>
+       <button mat-raised-button color="primary" type="submit" [disabled]="!softwareupfrom.valid" >Save</button>
+    </form>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+ </ng-template>
+ <!-- Software Update model end -->
+ 
+ 
+ <!-- Software ADD Modal Start-->
+ <ng-template #softwareAddModal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">software Add Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="swupaddfrom" (ngSubmit)="submitCloudAdd()">
+       <mat-form-field>
+          <mat-label>Software Name</mat-label>
+          <input matInput placeholder="Enter Cloud Name" [(ngModel)]="softwareAddName" formControlName="softwareAddformName">
+       </mat-form-field>
+       <!-- <small class="gene-block" *ngIf="swupaddfrom.controls['cloudAddformName'].hasError('required') && swupaddfrom.controls['cloudAddformName'].touched" class="warn-text">
+          Enter the Software Name.
+       </small> -->
+       
+       <br>
+
+
+       <mat-form-field>
+        <mat-label>Software Class</mat-label>
+        <select matNativeControl required [(ngModel)]="softwareAddCredList" formControlName="softwareAddformCredList"> 
+           <option value="" selected>--Select--</option>
+           <option *ngFor="let row of softwareClasslist" [value]="row[0]">{{row[1]}}</option>
+        </select>
+     </mat-form-field>
+     <!-- <small class="gene-block" *ngIf="swupaddfrom.controls['softwaeAddformCredList'].hasError('required') && swupaddfrom.controls['cloudAddformCredList'].touched" class="warn-text">
+        Select the SubClass.
+     </small> -->
+     <br>
+
+
+       <mat-form-field>
+          <mat-label>Software Sub Class</mat-label>
+          <select matNativeControl required [(ngModel)]="softwareAddCredList" formControlName="softwareAddformCredList"> 
+             <option value="" selected>--Select--</option>
+             <option *ngFor="let row of softwareSubClasslist" [value]="row[0]">{{row[1]}}</option>
+          </select>
+       </mat-form-field>
+       <!-- <small class="gene-block" *ngIf="swupaddfrom.controls['softwaeAddformCredList'].hasError('required') && swupaddfrom.controls['cloudAddformCredList'].touched" class="warn-text">
+          Select the SubClass.
+       </small> -->
+       <br>
+
+       <mat-form-field>
+        <mat-label>Remidate</mat-label>
+        <select matNativeControl required [(ngModel)]="softwareAddCredList" formControlName="softwareAddformCredList"> 
+           <option value="" selected>--Select--</option>
+           <option value="" selected>True</option>
+           <option value="" selected>False</option>
+
+           <!-- <option *ngFor="let row of softwareClasslist" [value]="row[0]">{{row[1]}}</option> -->
+        </select>
+     </mat-form-field>
+     <!-- <small class="gene-block" *ngIf="swupaddfrom.controls['softwaeAddformCredList'].hasError('required') && swupaddfrom.controls['cloudAddformCredList'].touched" class="warn-text">
+        Select the SubClass.
+     </small> -->
+     <br>
+
+
+       <button mat-raised-button color="primary" type="submit" [disabled]="!swupaddfrom.valid" >Save</button>
+    </form>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+ </ng-template>
+ <!-- software ADD Model End -->

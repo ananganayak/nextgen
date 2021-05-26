@@ -1,0 +1,75 @@
+<div class="reportMain">
+	<div fxLayout="column">
+		<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+			<div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100" fxFlex.gt-md="24">
+				<mat-form-field class="full-wid mrgn-b-lg">
+					<mat-select placeholder="Select Technology" (ngModelChange)="selectTechnology($event)" [(ngModel)]="SelectedTechnology">
+						<mat-option value=" ">--select--</mat-option>
+						<mat-option value="vmware">vmware</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100" fxFlex.gt-md="24">
+				<mat-form-field class="full-wid mrgn-b-lg ">
+					<mat-select placeholder="Select Customer" (ngModelChange)="select_Customer($event)" [(ngModel)]="Selected_Customer">
+						<mat-option *ngFor="let srv of TechnologyVal" [value]="srv">
+							{{srv}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100" fxFlex.gt-md="24">
+				<mat-form-field class="full-wid mrgn-b-lg ">
+					<input matInput placeholder="Select Start Date" [matDatepicker]="picker1" (dateInput)="StartDate('input', $event)"
+						(dateChange)="StartDate('change', $event)">
+					<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+					<mat-datepicker #picker1></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div fxFlex.gt-sm="24" fxFlex.gt-xs="24" fxFlex="100" fxFlex.gt-md="24">
+				<mat-form-field class="full-wid mrgn-b-lg ">
+					<input matInput placeholder="Select End Date" [matDatepicker]="picker" (dateInput)="EndDate('input', $event)"
+						(dateChange)="EndDate('change', $event)">
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			<div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+				<div class="example-button-row">
+					<button mat-raised-button color="primary" (click)="getDetails()">Get</button>
+				</div>
+				<span class="marquee-text">Disk related information are available only for VMs which has VMWare Tools installed.</span>
+			</div>
+		</div>
+	</div>
+	<!-- <p class="mt4" *ngIf="checkDataStatus == false"> No Data... ( ) </p> -->
+	<div class="tableSection mt4">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Row Data</h3>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Date Time</th>
+							<th>Meta</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr *ngFor="let body of reportGridget">
+							<td *ngFor="let b of body">{{body}}</td>
+						</tr> -->
+						<tr *ngFor="let body of reportGridget">
+							<td >{{body[0]}}</td>
+							<td >{{body[1]}}</td>
+							<td *ngIf="body[2] != null"> <a href="{{body[2]}}" target="_blank" ><mat-icon>archive</mat-icon></a> </td>
+							<td *ngIf="body[2] == null"><mat-icon class="mat-icon notranslate fa-spin material-icons mat-icon-no-color">autorenew</mat-icon></td>
+						
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

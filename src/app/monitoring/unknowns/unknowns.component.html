@@ -1,0 +1,51 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+	<mat-card>
+        <div class="gene-card-title">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <div fxLayout="column">
+                    <h4>Monitoring Unkowns</h4>
+                </div><span fxFlex></span>
+            </div>
+            <mat-divider></mat-divider>
+         </div>
+         <div class="gene-card-content pad-t-none">
+             <br>
+             <br>
+            <ngb-accordion [closeOthers]="true">
+                <ngb-panel id="main{{i}}" title="main{{i}}" *ngFor="let item of Unkowndata | keyvalue ; let i = index">
+                    <ng-template ngbPanelHeader let-opened="opened">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <h5 class="m-0">{{item.key}}</h5>
+                          <button ngbPanelToggle class="btn btn-link p-0">Toggle</button>
+                        </div>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <ngb-accordion [closeOthers]="true" >
+                            <ngb-panel id="sub{{k}}" title="sub{{k}}" *ngFor="let items of item.value | keyvalue ; let k = index">
+                                <ng-template ngbPanelHeader let-opened="opened">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                      <h5 class="m-0">{{items.key}}</h5>
+                                      <button ngbPanelToggle class="btn btn-link p-0">Toggle</button>
+                                    </div>
+                                </ng-template>
+                                <ng-template ngbPanelContent>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tr *ngFor="let tv of items.value">
+                                                <td>{{tv[0]}}</td>
+                                                <td>{{tv[1]}}</td>
+                                                <td>{{tv[2]}}</td>
+                                                <td>{{tv[3]}}</td>
+                                                <td>{{tv[4]}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </ng-template>
+                            </ngb-panel>
+                        </ngb-accordion>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+         </div>
+    </mat-card>
+</div>

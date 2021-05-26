@@ -1,0 +1,107 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+       <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+          <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+             <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+                <input type="text" class="form-control" placeholder="Search Here" >
+             </div>
+             <mat-card-actions class="mat-pad-none margin-none">
+                <button mat-raised-button mat-button-sm color="primary" (click)="dcmAddModalFn(dcmAddModal)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+             </mat-card-actions>
+          </div>
+       </div>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+             <div fxLayout="column">
+                <h4>Intelli-DCM</h4>
+             </div><span fxFlex></span>
+          </div>
+          <mat-divider></mat-divider>
+       </div>
+       <div class="gene-card-content pad-t-none">
+          <div class="table-responsive" style="margin-top: 25px;">
+             <table class="table table-bordered table-middle th-fw-light mb-0">
+                <thead style="background-color: #efefef;">
+                   <tr>
+                      <!-- <th>S.No</th> -->
+                      <th>S.No</th>
+                      <th>Commucation Type</th>
+                      <th>Config DB Name</th>
+                      <th>Config IP</th>
+                      <th>Config Port</th>
+                      <th>Config User Name</th>                    
+                   </tr>
+                </thead>
+                <!-- <tbody>
+                   <tr *ngFor="let policy of polocylist "> 
+                      <td>{{cloud[1]}}</td>
+                      <td>{{cloud[2]}}</td>
+                      <td>{{cloud[3]}}</td>
+                      <td>{{cloud[4]}}</td>
+                      <td>                  
+                      </td>                
+                   </tr>
+                </tbody> -->
+             </table>
+          </div>
+       </div>
+    </mat-card>
+ </div>   
+<!-- Policy engine Start-->
+<ng-template #dcmAddModal let-modal>
+    <div class="modal-header">
+       <h4 class="modal-title" id="modal-1">Intelli DCM Add</h4>
+       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+       </button>
+    </div>
+
+
+    <div class="modal-body">
+       <form [formGroup]="policyform" [formGroup]="policyForm" (ngSubmit)="submitPolicyAdd(policyForm.value)">
+        <mat-form-field>
+            <mat-label>Communication Type</mat-label>
+            <select matNativeControl required formControlName="groupType"> 
+               <option value="" selected>Select</option>          
+            </select>
+         </mat-form-field>
+        
+        <mat-form-field>
+           <mat-label>DCM Ip</mat-label>
+           <input matInput placeholder=" Enter DCM IP">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>DCM Port</mat-label>
+            <input matInput placeholder=" Enter DCM PORT">
+         </mat-form-field>
+         <mat-form-field>
+            <mat-label>DCM User</mat-label>
+            <input matInput placeholder=" Enter DCM User">
+         </mat-form-field>
+         <mat-form-field>
+            <mat-label>DCM Password</mat-label>
+            <input type="password" matInput placeholder=" Enter DCM PASSWORD">
+         </mat-form-field>
+         <mat-form-field>
+            <mat-label>Config Name</mat-label>
+            <input matInput placeholder=" Enter Config Name">
+         </mat-form-field>
+
+         <div class="modal-footer">
+            <button mat-button color="primary" (click)="modal.close('Save click')">Close</button>
+            <button mat-button color="success" >Save</button>
+            
+          </div>
+        </form>
+
+        
+
+
+
+      </div>
+
+    </ng-template>
+
+
+ 
+ 

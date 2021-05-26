@@ -1,0 +1,122 @@
+<div class="roidata">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 roiright roicolm">
+				<p>{{roi}}</p>
+				<mat-icon>run_circle</mat-icon>
+				<span>ROI</span>
+			</div>
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-4 roiright">
+						<p>{{ Organization }}</p>
+						<mat-icon>corporate_fare</mat-icon>
+						<span>Organization</span>
+					</div>
+					<div class="col-md-4 roiright">
+						<p>{{Towers }}</p>
+						<mat-icon>online_prediction</mat-icon>
+						<span>Towers</span>
+					</div>
+					<div class="col-md-4 roiright">
+						<p>{{Processes }}</p>
+						<mat-icon>settings_suggest</mat-icon>
+						<span>Processes</span>
+					</div>
+					<div class="col-md-4 roiright">
+						<p>{{ Executions}}</p>
+						<mat-icon>settings</mat-icon>
+						<span>Executions</span>
+					</div>
+					<div class="col-md-4 roiright">
+						<p>{{HoursAutomated }}</p>
+						<mat-icon>model_training</mat-icon>
+						<span>Hours Automated</span>
+					</div>
+					<div class="col-md-4 roiright">
+						<p>{{ExecutionHoursAutomated }}</p>
+						<mat-icon>history_toggle_off</mat-icon>
+						<span>Execution Hours Automated</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="processStatus">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6">
+				<div class="chart-section">
+					<h2>Process Status Count</h2>
+					<div style="display: block;" *ngIf="showWorkflowstatusChart == true">
+						<canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+							[plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+						</canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="chart-section">
+					<h2>Process By Running Time</h2>
+					<div style="display: block;" *ngIf="ProcessByRunningTimeChart == true">
+
+						<canvas baseChart [datasets]="bubbleChartData" [options]="bubbleChartOptions" [colors]="bubbleChartColors"
+							[legend]="bubbleChartLegend" [chartType]="bubbleChartType">
+						</canvas>
+
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="ProcessByType">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6">
+				<div class="processByCharts">
+					<h2>Process By Type</h2>
+					<div style="display: block;" *ngIf="processcategoryChart == true">
+						<canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+							[options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+						</canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="processByCharts">
+					<div style="display: block;" *ngIf="getProcessbysdChart == true">
+						<canvas baseChart [datasets]="ProcessByStartDate_lineChartData"
+							[labels]="ProcessByStartDate_lineChartLabels" [options]="ProcessByStartDate_lineChartOptions"
+							[colors]="ProcessByStartDate_lineChartColors"
+							[chartType]="ProcessByStartDate_lineChartType" [plugins]="ProcessByStartDate_lineChartPlugins">
+						</canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="processByCharts">
+					<div style="display: block;" *ngIf="processbyedChart == true">
+						<canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels"
+							[options]="lineChartOptions" [colors]="lineChartColors"
+							[chartType]="lineChartType" [plugins]="lineChartPlugins">
+						</canvas>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>

@@ -1,0 +1,62 @@
+ 
+ <div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+       <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn" fxLayoutAlign="start center">
+ 
+         </div>
+          <div class="mrgn-l-md mrgn-b-md add-user-btn" fxLayoutAlign="start center">
+             <mat-card-actions class="mat-pad-none margin-none">
+                <button mat-raised-button mat-button-sm color="primary">Start Discovery</button>
+             </mat-card-actions>
+          </div>
+       </div>
+       <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+             <div fxLayout="column">
+                <h4>Drop Events</h4>
+             </div><span fxFlex></span>
+          </div>
+          <mat-divider></mat-divider>
+       </div>
+       <div class="gene-card-content pad-t-none">
+          <div class="table-responsive" style="margin-top: 25px;">
+             <table class="table table-bordered table-middle th-fw-light mb-0">
+                <thead style="background-color: #efefef;">
+                   <tr>
+                      <th>CI Name</th>
+                      <th>Component</th>
+                      <th>Description</th>
+                      <th>Notes</th>
+                      <th>Severity</th>
+                      <th>Date Time</th>
+                      <th>Source</th>
+                      <th>Action</th>
+                   </tr>
+                </thead>
+                <!-- <tbody>
+                   <tr *ngFor="let item of disList">
+                      <td>{{item.discovery_id}}</td>
+                      <td>{{item.ip_address}}</td>
+                      <td>{{item.operating_system}}</td>
+                      <td>
+                        <button mat-icon-button color="primary" (click)="changeCredName(disCredChangeModal, item.cred_name, item.ip_address)">{{item.cred_name}}</button>
+                      </td>
+                      <td>
+                        <div class="example-button-row" color="primary">
+                            
+                            <button mat-icon-button >
+                              <mat-icon (click)="disDeattach(item.ip_address)">cancel</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                              <mat-icon (click)="disDelete(item.ip_address)">delete</mat-icon>
+                            </button>
+                          </div>
+                      </td>
+                   </tr>
+                </tbody> -->
+             </table>
+          </div>
+       </div>
+    </mat-card>
+ </div> 

@@ -1,0 +1,407 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div class="mrgn-b-md add-user-btn" style="float: left;"  fxLayoutAlign="start center" *ngIf="appOnAppKvmGrid == true">
+         <button mat-raised-button mat-button-sm color="primary" (click)="getAppKvmGrid(xs.key)"  *ngFor="let xs of appOnAppKvm[0] | keyvalue">{{xs.key}}-{{xs.value}}</button>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;" *ngIf="appMainGrid == false">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+            <div class="form-group" style="float: right; margin-right: 15px;"  >
+               <input type="text" class="form-control " *ngIf="appKvmCusGrid == true" placeholder="Search Here" [(ngModel)]="searchcust">
+               <input type="text" class="form-control " *ngIf="appKvmHostsGrid == true" placeholder="Search Here" [(ngModel)]="searchkvmhost">
+               <input type="text" class="form-control" *ngIf="appKvmVmsGrid == true" placeholder="Search Here" [(ngModel)]="searchkvms">
+               <input type="text" class="form-control " *ngIf="appIngridValGrid == true" placeholder="Search Here" [(ngModel)]="searchIngridVal">
+               <input type="text" class="form-control " *ngIf="appOngridValGrid == true" placeholder="Search Here" [(ngModel)]="searchOngridVal">
+            </div>
+            <mat-card-actions class="mat-pad-none margin-none">
+               <button mat-raised-button mat-button-sm color="primary" *ngIf="appKvmCusGrid == true" (click)="csvExpertCust()">Download CSV</button>
+               <button mat-raised-button mat-button-sm color="primary" *ngIf="appKvmHostsGrid == true" (click)="csvExpertKvmHost()">Download CSV</button>
+               <button mat-raised-button mat-button-sm color="primary" *ngIf="appKvmVmsGrid == true" (click)="csvExpertKvms()">Download CSV</button>
+               <button mat-raised-button mat-button-sm color="primary" *ngIf="appIngridValGrid == true" (click)="csvExpertIngridVal()">Download CSV</button>
+               <button mat-raised-button mat-button-sm color="primary" *ngIf="appOngridValGrid == true" (click)="csvExpertOngridVal()">Download CSV</button>
+               <button mat-raised-button mat-button-sm color="primary" (click)="backTomain()" >Back</button>
+            </mat-card-actions>
+         </div>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;" *ngIf="appMainGrid == true">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+            <mat-card-actions class="mat-pad-none margin-none">
+              <button mat-raised-button mat-button-sm color="primary" (click)="appAddModalFn(appAddModal)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+            </mat-card-actions>
+         </div>
+      </div>
+      <div class="gene-card-title" *ngIf="appMainGrid == true">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>Application Details</h4>
+            </div><span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content pad-t-none"  *ngIf="appMainGrid == true">
+         <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <th>S.No</th>
+                     <th>Application Name</th>
+                     <th>Application IP</th>
+                     <th>Application Type</th>
+                     <th>Credential</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let app of applicationlist; index as i">
+                     <td>{{i + 1}}</td>
+                     <td>{{app[1]}} <span *ngIf="app[6] > '0'" class="badge bg-info">New : {{app[6]}}</span></td>
+                     <td>{{app[2]}}</td>
+                     <td>{{app[3]}}</td>
+                     <td>
+                        <!-- {{app[4]}} -->
+                       <select class="form-control" disabled>
+                          <option value="">-- Select --</option>
+                          <option [value]="cred[0]" [selected]="cred[0] == app[4]" *ngFor="let cred of applicationcredlist"> {{cred[1]}} </option>
+                       </select>
+                     </td>
+                     
+                     <td>
+                       <div class="example-button-row" >
+                           <button mat-icon-button color="primary" (click)="appUpModal(appUpdateModal, app)" >
+                             <mat-icon>edit</mat-icon>
+                           </button>
+                           <button mat-icon-button color="primary" (click)="appDeleteFn(app[0])">
+                             <mat-icon>delete</mat-icon>
+                           </button>
+                           <button mat-icon-button color="primary" *ngIf="app[5] == 'Y'" (click)="appLaunchfn(app[0], app[3])">
+                             <mat-icon>launch</mat-icon>
+                           </button>
+                           <button mat-icon-button color="danger" *ngIf="app[5] == 'N'">
+                              <mat-icon>launch</mat-icon>
+                            </button>
+                         </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="gene-card-content pad-t-none"  *ngIf="appOnAppKvmGrid == true">
+         <div class="col-lg-12" style="float: left;"  fxLayoutAlign="start center">
+            <h4>KVM - {{appKvmNameVal}}</h4>
+            <!-- <div class="form-group" style="float: right;"  >
+               <input type="text" class="form-control" *ngIf="appKvmCusGrid == true" placeholder="Search Here" [(ngModel)]="searchcust">
+               <input type="text" class="form-control" *ngIf="appKvmHostsGrid == true" placeholder="Search Here" [(ngModel)]="searchkvmhost">
+               <input type="text" class="form-control" *ngIf="appKvmVmsGrid == true" placeholder="Search Here" [(ngModel)]="searchkvms">
+            </div> -->
+         </div>
+         <div class="table-responsive" style="margin-top: 25px;" *ngIf="appKvmCusGrid == true">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <th hidden>ID</th>
+                     <th width="40%">Customer Name</th>
+                     <th width="20%">Customer ID</th>
+                     <th width="20%">VM Count</th>
+                 </tr> 
+               </thead>
+               <tbody>
+                  <tr *ngFor="let item of appKvmOptGridVal | filter:searchcust">
+                     <td hidden>{{item[0]}}</td>
+                     <td>{{item[1]}}</td>
+                     <td>{{item[2]}}</td>
+                     <td>{{item[3]}}</td>
+                 </tr>
+                 <tr  *ngIf="appKvmOptGridVal.length == 0">
+                     <td colspan="5" style="text-align:center;">
+                        No Records Found
+                     </td> 
+                 </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="table-responsive" style="margin-top: 25px;" *ngIf="appKvmHostsGrid == true">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <th>Host ID</th>
+                     <th hidden>Host Type</th>
+                     <th>Host</th>
+                     <th>Host Label</th>
+                     <th>Host OS</th>
+                     <th>Host OS Version</th>
+                     <th>Total VMs</th>
+                 </tr> 
+               </thead>
+               <tbody>
+                  <tr *ngFor="let item of appKvmOptGridVal  | filter:searchkvmhost">
+                     <td>{{item[0]}}</td>
+                     <td hidden>{{item[1]}}</td>
+                     <td>{{item[2]}}</td>
+                     <td>{{item[3]}}</td>
+                     <td>{{item[4]}}</td>
+                     <td>{{item[5]}}</td>
+                     <td>{{item[6]}}</td>
+                 </tr>
+                 <tr  *ngIf="appKvmOptGridVal.length == 0">
+                     <td colspan="5" style="text-align:center;">
+                        No Records Found
+                     </td> 
+                 </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="table-responsive" style="margin-top: 25px;" *ngIf="appKvmVmsGrid == true">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <th width="20%"> &nbsp; VM ID</th>
+                     <th width="15%">VM Name</th>
+                     <th width="15%">VM OS</th>
+                     <th width="15%">Customer ID</th>
+                     <th width="15%">Host</th>
+                     <th width="20%">VM IP</th>
+                 </tr> 
+               </thead>
+               <tbody>
+                  <tr *ngFor="let item of appKvmOptGridVal  | filter:searchkvms">
+                     <td>
+                        <span hidden>{{item[0]}} - {{item[1]}}</span>
+                        <span class="label" *ngIf="'{{item[0]}}'=='POWEREDOFF'" style="background-color: #e41844; text-transform: uppercase;" title="Power OFF">OFF</span> 
+                        <span class="label" *ngIf="'{{item[0]}}'=='POWEREDON'" style="background-color: #4CAF50; text-transform: uppercase;" title="Power ON">ON</span>
+                        <span class="label" *ngIf="'{{item[0]}}'=='SUSPENDED'" style="background-color: #03a9f4; text-transform: uppercase;" title="Suspended">SUS</span> &nbsp; &nbsp;
+                        <span class="td_overflow" title="{{item[1]}}">{{item[1]}}</span> 
+                     </td>
+                     <td>{{item[2]}}</td>
+                     <td>{{item[3]}}</td>
+                     <td>{{item[4]}}</td>
+                     <td>{{item[5]}}</td>
+                     <td>{{item[6]}}</td>
+                 </tr>
+                 <tr  *ngIf="appKvmOptGridVal.length == 0">
+                     <td colspan="5" style="text-align:center;">
+                        No Records Found
+                     </td> 
+                 </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="gene-card-content pad-t-none"  *ngIf="appIngridValGrid == true">
+         <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background: #ebeef0;">
+                  <tr>
+                      <th width="35%">Interface</th>
+                      <th width="25%">Interface Name</th>
+                  </tr>    
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of appIngridVal  | filter:searchIngridVal">
+                      <td>{{item[0]}}</td>          
+                      <td>{{item[1]}}</td>
+                  </tr>
+                  <tr *ngIf="appIngridVal.length == 0">
+                      <td colspan="5" style="text-align:center;">
+                          No Records Found
+                      </td> 
+                  </tr>
+              </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="gene-card-content pad-t-none"  *ngIf="appOngridValGrid == true">
+         <div class="row">
+            <div class="col-lg-2">
+               <mat-form-field class="mrgn-l-md">
+                  <mat-select placeholder="Select Host Group" (ngModelChange)="appSelOnKeysFn($event)"
+                     [(ngModel)]="selVmGrpOptions">
+                     <mat-option [value]=""> -- select -- </mat-option>
+                     <mat-option *ngFor="let hgl of appOngridVal | keyvalue" [value]="hgl.key">{{hgl.key}}</mat-option>
+                  </mat-select>
+               </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+               <div class="mrgn-b-md add-user-btn" style="float: left;"  fxLayoutAlign="start center">
+                  <button mat-raised-button mat-button-sm color="primary" matBadge="{{xs.new}}" matBadgePosition="after" matBadgeColor="accent" (click)="getAppKvmONGridFn(xs.object_type)"  *ngFor="let xs of selBtnVal">{{xs.object_type}}- Total : {{xs.total}}</button>
+               </div>
+            </div>
+            <div class="col-lg-4">
+
+            </div>
+         </div>
+         <div class="table-responsive" style="margin-top: 25px;">
+            <div class="row">
+               <div class="col-lg-6">
+                  <h4>{{selVmGrpOptions}} - {{selVmGrpOptionsKey}}</h4>
+               </div>
+               <div class="col-lg-6">
+                  
+               </div>
+               <div class="col-lg-12">
+                  <table class="table table-bordered table-middle th-fw-light mb-0">
+                     <thead style="background: #ebeef0;">
+                        <tr>
+                           <th hidden>Object ID</th>
+                           <th width="35%">{{selVmGrpOptions}} Name</th>
+                           <th *ngIf="hypvals == 'esxivm'" width="25%">Customer Name</th>
+                           <th width="15%">Last Modified Date</th>
+                           <th width="25%">Remark</th>
+                        </tr>    
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let item of appOnGridMainVal | filter:searchOngridVal">
+                           <td hidden>{{item[1]}}</td>
+                           <td>
+                              <span hidden>{{item[6]}} - {{item[2]}} - {{item[0]}}</span>
+                              <span class="label" *ngIf="item[6]=='poweredOff'" style="background-color: #e41844; text-transform: uppercase;" title="Power OFF">OFF</span> 
+                              <span class="label" *ngIf="item[6]=='poweredOn'" style="background-color: #4CAF50; text-transform: uppercase;" title="Power ON">ON</span>
+                              <span class="label" *ngIf="item[6]=='suspended'" style="background-color: #03a9f4; text-transform: uppercase;" title="Suspended">SUS</span> &nbsp; &nbsp;
+                              <span class="td_overflow" title="{{item[2]}}">{{item[2]}}</span> 
+                              <span class="label" *ngIf="item[0] == 'new'" style="background-color: #4CAF50; padding-bottom: 0.5px;">New</span>
+                           </td>
+                           <td *ngIf="item == 'esxivm'" >{{item[5]}}</td>
+                           <td>{{item[3]}}</td>
+                           <td>
+                              <span class="label" *ngIf="splitFn(item[4])[0] =='red'" style="background-color: #e41844;" title="Delete from Unknow to Disappear">{{splitFn(item[4])[1]}}</span>
+                              <span class="label" *ngIf="splitFn(item[4])[0] =='green'" style="background-color: #4CAF50;" title="Service Addition is in Progress">{{splitFn(item[4])[1]}}</span>
+                           </td>
+                        </tr>
+                     <!-- <tr *ngIf="appOnGridMainVal.length == 0">
+                           <td colspan="5" style="text-align:center;">
+                              No Records Found
+                           </td> 
+                     </tr> -->
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </mat-card>
+</div>
+
+<!-- Application Add Modal -->
+<ng-template #appAddModal let-modal>
+  <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">Application Add Modal</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+     <form [formGroup]="appaddform" (ngSubmit)="submitAppAdd()">
+      <mat-form-field class="example-full-width">
+         <mat-label>Application Name</mat-label>
+         <input matInput placeholder="Enter CRED Name" [(ngModel)]="txtAddAppName" formControlName="txtAddformAppName">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appaddform.controls['txtAddformAppName'].hasError('required') && appaddform.controls['txtAddformAppName'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Application IP</mat-label>
+         <input matInput placeholder="Enter CRED Name" [(ngModel)]="txtAddAppIP" formControlName="txtAddformAppIP">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appaddform.controls['txtAddformAppIP'].hasError('required') && appaddform.controls['txtAddformAppIP'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Application Type</mat-label>
+         <select matNativeControl required [(ngModel)]="selAddAppType" formControlName="selAddAppformType"> 
+            <option value="" selected>--Select--</option>
+            <option value="VMWare vCenter"> VMWare vCenter </option>
+            <option value="vmware nsx"> VMWare NSX </option>
+            <option value="OnApp KVM"> OnApp KVM </option>
+            <option value="Firewall"> Firewall </option>
+            <option value="Switch"> Switch </option>
+            <option value="Router"> Router </option>
+            <option value="Load Balancer"> Load Balancer </option>
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appaddform.controls['selAddAppformType'].hasError('required') && appaddform.controls['selAddAppformType'].touched" class="warn-text">
+         Select the Value.
+      </small>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Credential</mat-label>
+         <select matNativeControl required [(ngModel)]="selAddAppCred" formControlName="selAddAppformCred"> 
+            <option value="" selected>--Select--</option>
+            <option *ngFor="let row of applicationcredlist" [value]="row[0]">{{row[1]}}</option>
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appaddform.controls['selAddAppformCred'].hasError('required') && appaddform.controls['selAddAppformCred'].touched" class="warn-text">
+         Select the Value.
+      </small>
+      <br>
+     <button mat-raised-button color="primary" type="submit" [disabled]="!appaddform.valid" >Save</button>
+     </form>
+  </div>
+  <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- Application MODEL END -->
+
+<!-- Application Add Modal -->
+<ng-template #appUpdateModal let-modal>
+  <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">Application Update Modal</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+     <form [formGroup]="appupdateform" (ngSubmit)="submitAppUpdate()">
+      <mat-form-field class="example-full-width">
+         <mat-label>Application Name</mat-label>
+         <input matInput placeholder="Enter CRED Name" [(ngModel)]="txtUpAppName" formControlName="txtUpAppformName">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appupdateform.controls['txtUpAppformName'].hasError('required') && appupdateform.controls['txtUpAppformName'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Application IP</mat-label>
+         <input matInput placeholder="Enter CRED Name" [(ngModel)]="txtUpAppIP" formControlName="txtUpAppformIP">
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appupdateform.controls['txtUpAppformIP'].hasError('required') && appupdateform.controls['txtUpAppformIP'].touched" class="warn-text">
+         Enter the Value.
+      </small>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Application Type</mat-label>
+         <select matNativeControl required [(ngModel)]="selUpAppType" formControlName="selUpAppformType"> 
+            <option value="" selected>--Select--</option>
+            <option value="VMWare vCenter"> VMWare vCenter </option>
+            <option value="vmware nsx"> VMWare NSX </option>
+            <option value="OnApp KVM"> OnApp KVM </option>
+            <option value="Firewall"> Firewall </option>
+            <option value="Switch"> Switch </option>
+            <option value="Router"> Router </option>
+            <option value="Load Balancer"> Load Balancer </option>
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appupdateform.controls['selUpAppformType'].hasError('required') && appupdateform.controls['selUpAppformType'].touched" class="warn-text">
+         Select the Value.
+      </small>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Credential</mat-label>
+         <select matNativeControl required [(ngModel)]="selUpAppCred" formControlName="selUpAppformCred"> 
+            <option value="" selected>--Select--</option>
+            <option *ngFor="let row of applicationcredlist" [value]="row[0]">{{row[1]}}</option>
+         </select>
+      </mat-form-field>
+      <small class="gene-block" *ngIf="appupdateform.controls['selUpAppformCred'].hasError('required') && appupdateform.controls['selUpAppformCred'].touched" class="warn-text">
+         Select the Value.
+      </small>
+      <br>
+     <button mat-raised-button color="primary" type="submit" [disabled]="!appupdateform.valid">Save</button>
+   </form>
+  </div>
+  <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- Application MODEL END -->

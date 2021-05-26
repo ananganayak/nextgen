@@ -1,0 +1,228 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+            <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+               <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchmachine">
+            </div>
+            <mat-card-actions class="mat-pad-none margin-none">
+               <button mat-raised-button mat-button-sm color="primary" (click)="addMachineModal(machineCreateModal)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+            </mat-card-actions>
+         </div>
+      </div>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>Machine Details</h4>
+            </div><span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content pad-t-none">
+         <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <!-- <th>S.No</th> -->
+                     <th>Host Name</th>
+                     <th>IP Address</th>
+                     <th>Platform</th>
+                     <th>OS Name</th>
+                     <th>OS Version</th>
+                     <th>Remediate</th>
+                     <th>Credentials</th>
+                     <th>Triage</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let machineitem of machinelist  | keyvalue | filter : searchmachine">
+                     <!-- <td>{{i+1}}</td> -->
+                     <td>{{machineitem.value.Hostname}}</td>
+                     <td>{{machineitem.value.IPAddress}}</td>
+                     <td>{{machineitem.value.Platform}}</td>
+                     <td>{{machineitem.value.OSName}}</td>
+                     <td>{{machineitem.value.OSVersion}}</td>
+                     <td><button mat-icon-button color="primary" (click)="changeRemediate(machineRemediateModal, machineitem.value.Hostname, machineitem.value.Remediate)">{{machineitem.value.Remediate}}</button></td>
+                     <td><button mat-icon-button color="primary" (click)="changeCredential(machineCredModal, machineitem.value.Hostname, machineitem.value.IPAddress, machineitem.value['Credentials ID'])">{{machineitem.value['Credentials ID']}}</button></td>
+                     <td><button mat-icon-button color="primary"><mat-icon>launch</mat-icon></button></td>
+                     <td>
+                        <div class="example-button-row">
+                           <!-- <button mat-icon-button color="primary">
+                              <mat-icon>edit</mat-icon>
+                           </button> -->
+                           <button mat-icon-button color="primary">
+                              <mat-icon (click)="deleteMachine(machineitem.value.machine_id)">delete</mat-icon>
+                           </button>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </mat-card>
+</div>
+
+<!-- Remediate Update Modal Start -->
+<ng-template #machineRemediateModal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Remediate Update Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <mat-form-field class="example-full-width">
+         <mat-label>Software Name</mat-label>
+         <input matInput placeholder="Enter Software Name" disabled [(ngModel)]="txtUphostname">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="example-full-width">
+         <mat-label>Remediate</mat-label>
+         <select matNativeControl required [(ngModel)]="selUpRemediate">
+            <option value="" selected>--Select--</option>
+            <option *ngFor="let row of machinemasterlov.Remediate" [value]="row" >{{row}}</option>
+            <!-- <option value="N">N</option> -->
+         </select>
+      </mat-form-field>
+      <br>
+   </div>
+   <div class="modal-footer">
+      <button mat-raised-button color="primary" (click)="submitUpRemediate()">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+</ng-template>
+<!-- Remediate Update Modal End -->
+
+<!-- cred Update Modal Start -->
+<ng-template #machineCredModal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Cred Update Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="machineupform" (ngSubmit)="submitUpCred()">
+         <mat-form-field class="example-full-width">
+            <mat-label>IP Address</mat-label>
+            <input matInput placeholder="Enter IP Address" disabled [(ngModel)]="txtUpIP" formControlName="txtUpformIP">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineupform.controls['txtUpformIP'].hasError('required') && machineupform.controls['txtUpformIP'].touched" class="warn-text">
+            Enter the Value.
+         </small>
+         <br>
+         <mat-form-field class="example-full-width">
+            <mat-label>OS Name</mat-label>
+            <input matInput placeholder="Enter OS Name" disabled [(ngModel)]="txtUpOsName" formControlName="txtUpOsformName">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineupform.controls['txtUpOsformName'].hasError('required') && machineupform.controls['txtUpOsformName'].touched" class="warn-text">
+            Enter the Value.
+         </small>
+         <br>
+         <mat-form-field class="example-full-width">
+            <mat-label>Credential Name</mat-label>
+            <select matNativeControl required [(ngModel)]="selUpCredName" formControlName="selUpCredformName">
+               <option value="" selected>--Select--</option>
+               <option *ngFor="let row of machinemasterlov.Credentials" [value]="row">{{row}}</option>
+            </select>
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineupform.controls['selUpCredformName'].hasError('required') && machineupform.controls['selUpCredformName'].touched" class="warn-text">
+            Select the Value.
+         </small>
+         <br>
+         <button mat-raised-button color="primary" type="submit" [disabled]="!machineupform.valid">Save</button>
+      </form>
+   </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+</ng-template>
+<!-- Remediate Update Modal End -->
+
+<!-- Machine Add Modal Start -->
+<ng-template #machineCreateModal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Machine Add Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="machineaddform" (ngSubmit)="submitAddMachine()">
+         <mat-form-field>
+            <mat-label>Host Name </mat-label>
+            <input matInput placeholder="Enter Host Name" [(ngModel)]="txtAddHostName"  formControlName="txtAddformHostName">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineaddform.controls['txtAddformHostName'].hasError('required') && machineaddform.controls['txtAddformHostName'].touched" class="warn-text">
+            Enter the Value.
+         </small>
+         <br>
+         <mat-form-field>
+            <mat-label>IP Address</mat-label>
+            <input matInput placeholder="Enter IP Address" [(ngModel)]="txtAddIP" formControlName="txtformAddIP">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineaddform.controls['txtformAddIP'].hasError('required') && machineaddform.controls['txtformAddIP'].touched" class="warn-text">
+            Enter the Value.
+         </small>
+         <br>
+         <mat-form-field>
+            <mat-label>Platform</mat-label>
+            <select matNativeControl required [(ngModel)]="selAddPlatform" formControlName="selAddformPlatform">
+               <option value="" selected>--Select--</option>
+               <option value="Linux">Linux</option>
+               <option value="Windows">Windows</option>
+               <!-- <option *ngFor="let row of machinemasterlov.Credentials" [value]="row">{{row}}</option> -->
+            </select>
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineaddform.controls['selAddformPlatform'].hasError('required') && machineaddform.controls['selAddformPlatform'].touched" class="warn-text">
+            Select the Value.
+         </small>
+         <br>
+         <mat-form-field>
+            <mat-label>OS Name</mat-label>
+            <input matInput placeholder="Enter OS Name" [(ngModel)]="txtAddOsName" formControlName="txtAddformOsName">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineaddform.controls['txtAddformOsName'].hasError('required') && machineaddform.controls['txtAddformOsName'].touched" class="warn-text">
+            Enter the Value.
+         </small>
+         <br>
+         <mat-form-field>
+            <mat-label>OS Version</mat-label>
+            <input matInput placeholder="Enter OS Version" [(ngModel)]="txtAddOsversion" formControlName="txtAddformOsversion">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineaddform.controls['txtAddformOsversion'].hasError('required') && machineaddform.controls['txtAddformOsversion'].touched" class="warn-text">
+            Enter the Value.
+         </small>
+         <br>
+         <mat-form-field>
+            <mat-label>Credential</mat-label>
+            <select matNativeControl required [(ngModel)]="selAddCredName" formControlName="seladdformcname">
+               <option value="" selected>--Select--</option>
+               <option *ngFor="let row of machinemasterlov.Credentials" [value]="row">{{row}}</option>
+            </select>
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineaddform.controls['seladdformcname'].hasError('required') && machineaddform.controls['seladdformcname'].touched" class="warn-text">
+            Select the Value.
+         </small>
+         <br>
+         <mat-form-field>
+            <mat-label>Remediate</mat-label>
+            <select matNativeControl required [(ngModel)]="selAddRemediate" formControlName="seladdformreme">
+               <option value="" selected>--Select--</option>
+               <option *ngFor="let row of machinemasterlov.Remediate" [value]="row" >{{row}}</option>
+            </select>
+         </mat-form-field>
+         <small class="gene-block" *ngIf="machineaddform.controls['seladdformreme'].hasError('required') && machineaddform.controls['seladdformreme'].touched" class="warn-text">
+            Select the Value.
+         </small>
+         <br>
+         <button mat-raised-button color="primary"  type="submit" [disabled]="!machineaddform.valid" >Save</button>
+      </form>
+   </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+</ng-template>
+<!-- Machine Add Modal End -->

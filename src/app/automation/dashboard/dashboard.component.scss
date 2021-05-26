@@ -1,0 +1,112 @@
+.roiright {
+  background-color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 0px;
+  border: 1px solid #e9e9e9;
+
+  span {
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+  }
+
+  p {
+    font-size: 25px;
+  }
+
+  .mat-icon {
+    font-size: 50px;
+    margin: 0px;
+    padding: 0px;
+    display: contents;
+    text-align: center;
+    color: #607d8b;
+  }
+}
+
+.roicolm {
+  p {
+    margin-top: 80px;
+  }
+}
+
+.processStatus {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+
+
+@keyframes chartjs-render-animation {
+  from {
+    opacity: .99
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+.chartjs-render-monitor {
+  animation: chartjs-render-animation 1ms
+}
+
+.chartjs-size-monitor,
+.chartjs-size-monitor-expand,
+.chartjs-size-monitor-shrink {
+  position: absolute;
+  direction: ltr;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+  z-index: -1
+}
+
+.chartjs-size-monitor-expand>div {
+  position: absolute;
+  width: 1000000px;
+  height: 1000000px;
+  left: 0;
+  top: 0
+}
+
+.chartjs-size-monitor-shrink>div {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  left: 0;
+  top: 0
+}
+
+
+.chart-section {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 10px;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-align: left;
+  }
+}
+
+.processByCharts{
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 10px;
+  margin-top: 10px;
+
+  h2{
+    font-size: 20px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-align: left;
+  }
+}

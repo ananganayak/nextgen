@@ -1,0 +1,284 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+    <mat-card>
+        <div class="csAutoscaleController">
+            <div class="row">
+
+                <div class="col-md-12 monitorpage-content">
+                    <div class="row">
+                        <div class="col-md-3 ">
+                            <div class="panel panel-default" id="hostName" style="margin-bottom: 0px;">
+                                <div class="panel-heading">Auto-Scale List
+                                    <span><a href="" (click)="showSearch()"><i class="fa fa-search"
+                                                aria-hidden="true"></i></a></span>
+                                    <p ng-hide="showsearchtxt" style="margin-top: 7px;"><input type="text"
+                                            class="form-control" id="txtshowsearch" [(ngModel)]="searchText" name="search"
+                                            value="" placeholder="Search ..." autocomplete="off"></p>
+                                </div>
+                                <div class="panel-body" id="hostBody">
+                                    <div class="value-row row" >
+                                        <a href="" class="btn btn-link" style="float: left;"
+                                          (click)="updateRow()"></a>
+                                       
+                                        <!-- <a href="" class="btn btn-danger" style="float: right;"
+                                           (click)="deleteRow()"><i class="fa fa-trash-o"
+                                                aria-hidden="true"></i></a> -->
+                                                <a href="" class="btn btn-danger" style="float: right;"
+                                                (click)="deleteRow()" ><i class="fa fa-trash-o"
+                                                aria-hidden="true"></i></a>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="col-lg-12" style="text-align: right;">
+                                
+                                    <button mat-raised-button color="primary" style="margin-right: 15px;">Add New</button>
+                                    <button mat-raised-button color="warn" (click)="closeModalfn()">Cancel</button>                           
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="panel panel-white" id="datatablepanel" 
+                                    style="margin-bottom: 0px;">
+                                    <div class="panel-body" style="padding: 0px">
+                                        <form id="autoscaleform">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+
+                                                        <!-- <label>Auto-Scale Name</label>
+                                                        <input type="text" class="form-control" id="txtasname"
+                                                            ng-model="txtasname" name="txtasname"
+                                                            placeholder="Enter The Auto-Scale Name"> -->
+                                                            <mat-form-field appearance="outline">
+                                                                <mat-label>Enter The Auto-Scale Name</mat-label>
+                                                                <input matInput  >
+                                                             </mat-form-field>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <!-- <label>Real Service Group</label>
+                                                        <input type="text" class="form-control" id="txtasrsg"
+                                                            ng-model="txtasrsg" name="txtasrsg"
+                                                            placeholder="Enter The Real Service Group"> -->
+                                                            <mat-form-field appearance="outline">
+                                                                <mat-label>Enter The Real Service Group</mat-label>
+                                                                <input matInput >
+                                                             </mat-form-field>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <!-- <label for="txtsmtpip">Hypervisor ENV <span
+                                                                style="color: red;">*</span></label>
+                                                        <select class="form-control" id="selhyperenv"
+                                                            ng-model="selhyperenv" autocomplete="off" name="selhyperenv"
+                                                            ng-change="getiplistfn(selhyperenv)">
+                                                            <option value="">-- select --</option>
+
+                                                        </select> -->
+                                                        <mat-form-field appearance="outline">
+                                                            <mat-label>Hypervisor ENV</mat-label>
+                                                            <mat-select>
+                                                              <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+                                                                {{food.viewValue}}
+                                                              </mat-option> -->
+                                                              <mat-option>a</mat-option>
+                                                              <mat-option>b</mat-option>
+
+                                                            </mat-select>
+                                                          </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <!-- <label for="txtsmtpip">Tenants Type<span
+                                                                style="color: red;">*</span></label>
+                                                        <select class="form-control" id="selhypervisor"
+                                                            ng-model="selhypervisor" autocomplete="off"
+                                                            name="selhypervisor" ng-change="getvmwarelistfn()">
+                                                            <option value="">-- select --</option>
+                                                        </select> -->
+                                                        <mat-form-field appearance="outline">
+                                                            <mat-label>Hypervisor ENV</mat-label>
+                                                            <mat-select>
+                                                              <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+                                                                {{food.viewValue}}
+                                                              </mat-option> -->
+                                                              <mat-option>a</mat-option>
+                                                              <mat-option>b</mat-option>
+
+                                                            </mat-select>
+                                                          </mat-form-field>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12"
+                                                    style="border: 1px solid #efefef; padding: 10px; margin: 17px; width: 97%;">
+                                                    <div class="row"
+                                                        style="height: 280px; overflow: scroll; overflow-y: scroll; width: 100%; margin-left: 0px !important; padding: 15px 5px 5px 15px;">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <!-- <input type="text" class="form-control"
+                                                                    id="txtsearchvms" ng-model="txtsearchvms"
+                                                                    name="txtsearchvms" ng-change="searchCheckval(0)"
+                                                                    placeholder="Enter The VMs"> -->
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-label>Enter The VM's</mat-label>
+                                                                        <input matInput  class="form-control" id ="txtSeaarchVms" (ngModalChange)="searchCheckVal(0)" >
+                                                                     </mat-form-field>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3"
+                                                            ng-repeat="chk in hypvmwarelist | filter : txtsearchvms">
+                                                            <div class="form-group">
+                                                                <div class="checkbox">
+                                                                    <label style="padding-left: 0px;">
+                                                                        <input type="checkbox" id="chkaddvmware">
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            Minimum Power On
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <!-- <input type="number" class="form-control"
+                                                                    id="txtminpoweron" ng-model="txtminpoweron"
+                                                                    name="txtminpoweron" placeholder=""> -->
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-label>Enter minimum power on</mat-label>
+                                                                        <input matInput type="number"  >
+                                                                     </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            Power ON
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <!-- <select class="form-control" id="selpoweronone"
+                                                                    ng-model="selpoweronone" autocomplete="off"
+                                                                    name="selpoweronone">
+                                                                    <option value="">-- select --</option>
+                                                                    <option value="cpu">CPU</option>
+                                                                    <option value="mem">MEM</option>
+                                                                </select> -->
+                                                                <mat-form-field appearance="outline">
+                                                                    <!-- <mat-label>Hypervisor ENV</mat-label> -->
+                                                                    <mat-select class="form-control" id="selpoweronone"
+                                                                    ng-model="selpoweronone" autocomplete="off"
+                                                                    name="selpoweronone">
+                                                                    <mat-option value="cpu">CPU</mat-option>
+                                                                      <mat-option value="mem">MEM</mat-option>
+        
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <!-- <input type="text" class="form-control"
+                                                                    id="txtpoweronone" ng-model="txtpoweronone" readonly
+                                                                    name="txtpoweronone" placeholder=">"> -->
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-label>></mat-label>
+                                                                        <input matInput type="text" class="form-control"
+                                                                        id="txtPowerOnOne" ng-model="txtPowerOnOne" readonly
+                                                                        name="txtPowerOnOne"  >
+                                                                     </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <!-- <input type="text" class="form-control"
+                                                                    id="txtpowerontwo" ng-model="txtpowerontwo"
+                                                                    name="txtpowerontwo"> -->
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-label>></mat-label>
+                                                                        <input matInput type="text" class="form-control"
+                                                                        id="txtPowerOnOTwo" ng-model="txtPowerOnTwo" readonly
+                                                                        name="txtPowerOnTwo"  >
+                                                                     </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            Power OFF
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <!-- <select class="form-control" id="selpoweroffone"
+                                                                    ng-model="selpoweroffone" autocomplete="off"
+                                                                    name="selpoweroffone">
+                                                                    <option value="">-- select --</option>
+                                                                    <option value="cpu">CPU</option>
+                                                                    <option value="mem">MEM</option>
+                                                                </select> -->
+                                                                <mat-form-field appearance="outline">
+                                                                    <!-- <mat-label>Hypervisor ENV</mat-label> -->
+                                                                    <mat-select class="form-control" id="selPowerOffOne"
+                                                                    ng-model="selPowerOffOne" autocomplete="off"
+                                                                    name="selpoweroffone">
+                                                                    <mat-option value="cpu">CPU</mat-option>
+                                                                      <mat-option value="mem">MEM</mat-option>
+        
+                                                                    </mat-select>
+                                                                  </mat-form-field>
+                                                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <!-- <input type="text" class="form-control"
+                                                                    id="txtpoweroffone" ng-model="txtpoweroffone"
+                                                                    readonly name="txtpoweroffone" placeholder="<"> -->
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-label> < </mat-label>
+                                                                        <input matInput type="text" class="form-control"
+                                                                        id="txtPowerOffOne" ng-model="txtPowerOffOne" readonly
+                                                                        name="txtPowerOffOne"  >
+                                                                   </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control"
+                                                                    id="txtpowerofftwo" ng-model="txtpowerofftwo"
+                                                                    name="txtpowerofftwo">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                     <button mat-raised-button color="green" (click)=submitClick()>Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

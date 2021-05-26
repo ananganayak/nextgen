@@ -1,0 +1,307 @@
+
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+	<mat-card>
+		<div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+			<div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+				<!-- <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+					<input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchcredstore">
+				</div> -->
+				<mat-card-actions class="mat-pad-none margin-none">
+					<button mat-raised-button color="primary" class="md-5" (click)="open(content)">ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+				</mat-card-actions>
+			</div>
+		</div>
+		<div class="gene-card-title">
+			<div fxLayout="row" fxLayoutAlign="start center">
+				<div fxLayout="column">
+					<h4>User List</h4>
+				</div><span fxFlex></span>
+			</div>
+			<mat-divider></mat-divider>
+		</div>
+		<div class="gene-card-content pad-t-none">
+			<div>
+				<table mat-table [dataSource]="dataSource" matSort>
+					<ng-container matColumnDef="pk_id">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+						<td mat-cell *matCellDef="let row"> {{row.pk_id}} </td>
+					</ng-container>
+					<ng-container matColumnDef="user_id">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> user_id </th>
+						<td mat-cell *matCellDef="let row"> {{row.user_id}} </td>
+					</ng-container>
+					<ng-container matColumnDef="first_name">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> first_name </th>
+						<td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
+					</ng-container>
+					<ng-container matColumnDef="last_name">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> last_name </th>
+						<td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.last_name}} </td>
+					</ng-container>
+					<ng-container matColumnDef="email_id">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> email_id </th>
+						<td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.email_id}} </td>
+					</ng-container>
+					<ng-container matColumnDef="phone_number">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> phone_number </th>
+						<td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.phone_number}} </td>
+					</ng-container>
+					<ng-container matColumnDef="role_name">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> role_name </th>
+						<td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.role_name}} </td>
+					</ng-container>
+					<ng-container matColumnDef="Customer">
+						<th mat-header-cell *matHeaderCellDef> Customer </th>
+						<td mat-cell *matCellDef="let row"> 
+							<!-- <span (click)="UserCustomerMappingTrigger(content2 , row)" class="actionBtn">
+								<mat-icon>repeat</mat-icon>
+							</span>	 -->
+							<button mat-icon-button color="primary" >
+								<mat-icon (click)="UserCustomerMappingTrigger(content2, row)" >repeat</mat-icon>
+							</button>
+						</td>
+					</ng-container>
+					<ng-container matColumnDef="Action">
+						<th mat-header-cell *matHeaderCellDef> Action </th>
+						<td mat-cell *matCellDef="let row">
+							<!-- <span class="actionBtn">
+								<mat-icon>edit</mat-icon>
+							</span> -->
+							<button mat-icon-button color="primary" >
+								<mat-icon (click)="editUser(content1 ,row)" >edit</mat-icon>
+							</button>
+							<button mat-icon-button color="primary">
+								<mat-icon (click)="userDelete(row.user_id)" >delete</mat-icon>
+							</button>
+							<!-- <span (click)="userDelete(row.user_id)" class="actionBtn">
+								<mat-icon>delete</mat-icon>
+							</span>	 -->
+						</td>
+					</ng-container>
+					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+					<!-- Row shown when there is no matching data. -->
+					<tr class="mat-row" *matNoDataRow>
+						<td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+					</tr>	
+				</table>
+				<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+			</div>
+		</div>
+	</mat-card>
+</div>
+
+<!-- CREATE MODEL START -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New user</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+		<mat-form-field class="example-full-width">
+			<mat-label>First Name</mat-label>
+			<input matInput placeholder="Enter FirstName" [(ngModel)]="FirstName">
+		</mat-form-field>
+		<br>
+		<mat-form-field class="example-full-width">
+			<mat-label>Middle Name </mat-label>
+			<input matInput placeholder="Enter MiddleName" [(ngModel)]="MiddleName ">
+		</mat-form-field>
+		<br>
+		<mat-form-field class="example-full-width">
+			<mat-label>Last Name</mat-label>
+			<input matInput placeholder="Enter LastName" [(ngModel)]="LastName">
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>Email Id</mat-label>
+			<input matInput placeholder="Enter Email Id" [(ngModel)]="EmailId">
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>User Name</mat-label>
+			<input matInput placeholder="Enter User name" [(ngModel)]="Username">
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>Phone Number</mat-label>
+			<input matInput placeholder="Enter Phone Number" [(ngModel)]="PhoneNumber">
+		</mat-form-field>
+		<br>
+
+
+		<mat-form-field class="example-full-width">
+			<mat-label>Roles</mat-label>
+			<select matNativeControl required [(ngModel)]="RolesVal"> 
+				<option value="" selected></option>
+				<option *ngFor="let role of rolesData" [value]="role">{{role}}</option>
+			</select>
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>User Type</mat-label>
+			<select matNativeControl required [(ngModel)]="userTypeVal"> 
+				<option value="" selected></option>
+				<option value="Non LDAP">Non LDAP</option>
+				<option value="LDAP">LDAP</option>
+			</select>
+		</mat-form-field>
+		<br>
+
+
+		<mat-form-field class="example-full-width">
+			<mat-label>TimeZone</mat-label>
+			<select matNativeControl required [(ngModel)]="ZonesVal"> 
+				<option value="" selected></option>
+				<option *ngFor="let zones of zonesData" [value]="zones.pk_zone_id">{{zones.country_code}} - {{zones.time_zone}}</option>
+			</select>
+		</mat-form-field>
+		<br>
+
+  </div>
+  <div class="modal-footer">
+		<button mat-raised-button color="primary" (click)="createUser()">Create User</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- CREATE MODEL END -->
+
+
+<!-- UPDATE USER DETAILS MODE START -->
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+		<mat-form-field class="example-full-width">
+			<mat-label>First Name</mat-label>
+			<input matInput placeholder="Enter FirstName" [(ngModel)]="EditUserVal.first_name">
+		</mat-form-field>
+		<br>
+		<mat-form-field class="example-full-width">
+			<mat-label>Middle Name </mat-label>
+			<input matInput placeholder="Enter MiddleName" [(ngModel)]="EditUserVal.middle_name ">
+		</mat-form-field>
+		<br>
+		<mat-form-field class="example-full-width">
+			<mat-label>Last Name</mat-label>
+			<input matInput placeholder="Enter LastName" [(ngModel)]="EditUserVal.last_name">
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>Email Id</mat-label>
+			<input matInput placeholder="Enter Email Id" [(ngModel)]="EditUserVal.email_id">
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>User Name</mat-label>
+			<input matInput placeholder="Enter User name" [(ngModel)]="EditUserVal.user_id">
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="example-full-width">
+			<mat-label>Phone Number</mat-label>
+			<input matInput placeholder="Enter Phone Number" [(ngModel)]="EditUserVal.phone_number">
+		</mat-form-field>
+		<br>
+
+
+		<mat-form-field class="mrgn-l-md">
+			<mat-label>Roles</mat-label>
+			<select matNativeControl required [(ngModel)]="updateRolesVal"> 
+				<option value="" selected></option>
+				<option *ngFor="let role of rolesData" [value]="role">{{role}}</option>
+			</select>
+		</mat-form-field>
+		<br>
+
+		<mat-form-field class="mrgn-l-md">
+			<mat-label>User Type</mat-label>
+			<select matNativeControl required [(ngModel)]="updateUserTypeVal"> 
+				<option value="" selected></option>
+				<option value="Non LDAP">Non LDAP</option>
+				<option value="LDAP">LDAP</option>
+			</select>
+		</mat-form-field>
+		<br>
+
+
+		<mat-form-field class="mrgn-l-md">
+			<mat-label>TimeZone</mat-label>
+			<select matNativeControl required [(ngModel)]="updateZonesVal"> 
+				<option value="" selected></option>
+				<option *ngFor="let zones of zonesData" [value]="zones.pk_zone_id">{{zones.country_code}} - {{zones.time_zone}}</option>
+			</select>
+		</mat-form-field>
+		<br>
+
+
+  </div>
+  <div class="modal-footer">
+		<button mat-raised-button color="primary" (click)="UpdateUserInfo()">Create User</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- UPDATE USER DETAILS MODEL END -->
+
+
+
+<!-- USER CUSTOMER MAPPING START -->
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">User Customer mapping</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+		<button mat-raised-button color="primary" (click)="userCustomerMapping()">Save</button>
+
+		<div class="userTable">
+
+		<div *ngIf="userMappingLoading == true" class="tableLoding">
+				<img src="assets/img/lodign.gif" alt="">
+		</div>
+
+		<table *ngIf="userMappingLoading == false" class="table table-striped">
+			<thead>
+			<tr>
+				<th scope="col">Technology</th>
+				<th scope="col">Customer ID	</th>
+				<th scope="col">Customer Name	</th>
+				<th scope="col">Mapping</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr *ngFor="let mappingData of userCustMapData">
+				<td>{{ mappingData.technology_loc }}</td>
+				<td>{{ mappingData.customer_id }}</td>
+				<td>{{ mappingData.customer_name }}</td>
+				<td>
+					<mat-slide-toggle (change)="mappingEvt($event, mappingData.cid)"></mat-slide-toggle>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+  </div>
+  <div class="modal-footer">
+		<button mat-raised-button color="primary" (click)="userCustomerMapping()">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- USER CUSTOMER MAPPING END -->

@@ -1,0 +1,197 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+            <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;"  >
+               <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchcredstore">
+            </div>
+            <mat-card-actions class="mat-pad-none margin-none">
+               <button mat-raised-button mat-button-sm color="primary" (click)="addCredDialog(credaddmodal)" >ADD<mat-icon class="mrgn-l-md gene-text-xl">add</mat-icon></button>
+            </mat-card-actions>
+         </div>
+      </div>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>CRED Details</h4>
+            </div><span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content pad-t-none">
+         <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <th>S.No</th>
+                     <th>CRED Name</th>
+                     <th>CRED Type</th>
+                     <th>User Name</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let data of credlist | filter:searchcredstore">
+                     <td>{{data[0]}}</td>
+                     <td>{{data[1]}}</td>
+                     <td>{{data[2]}}</td>
+                     <td>{{data[3]}}</td>
+                     <td>
+                        <div class="example-button-row">
+                           <button mat-icon-button color="primary" >
+                             <mat-icon (click)="updateCredDialog(credupdatemodal, data)"  >edit</mat-icon>
+                           </button>
+                           <button mat-icon-button color="primary">
+                             <mat-icon (click)="deleteCred(data[1])">delete</mat-icon>
+                           </button>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </mat-card>
+</div>
+
+
+<!-- Cred Add Modal -->
+<ng-template #credaddmodal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">CRED Add Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="credaddform"  (ngSubmit)="submitCredAdd()">
+         <mat-form-field class="example-full-width">
+            <mat-label>CRED Name</mat-label>
+            <input matInput type="text" placeholder="Enter CRED Name" formControlName="txtCredName" [(ngModel)]="credAddName">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credaddform.controls['txtCredName'].hasError('required') && credaddform.controls['txtCredName'].touched" class="warn-text">
+            Enter the CRED Name.
+         </small>
+         <br>
+         <mat-form-field class="example-full-width">
+            <mat-label>CRED Type</mat-label>
+            <select matNativeControl required [(ngModel)]="credAddType" formControlName="selCredType" > 
+               <option value="" selected>--Select--</option>
+               <option *ngFor="let row of credtypelov" [value]="row.value">{{row.value}}</option>
+            </select>
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credaddform.controls['selCredType'].hasError('required') && credaddform.controls['selCredType'].touched" class="warn-text">
+            Select CRED Type
+         </small>
+         <br>
+         <mat-form-field class="example-full-width" *ngIf="credAddType != 'ARCON'">
+            <mat-label *ngIf="credAddType != 'WINRM'">Port</mat-label>
+            <mat-label *ngIf="credAddType == 'WINRM'">WINRM PORT</mat-label>
+            <input matInput type="number" placeholder="Enter Port" [(ngModel)]="credAddPort"  formControlName="txtPort">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credaddform.controls['txtPort'].hasError('required') && credaddform.controls['txtPort'].touched" class="warn-text">
+            Enter The Value.
+         </small>
+         <br>
+   
+         <mat-form-field class="example-full-width" *ngIf="credAddType == 'WINRM'">
+            <mat-label>RDP Port</mat-label>
+            <input matInput type="number" placeholder="Enter RDP Port" [(ngModel)]="credAddRDPort"  formControlName="txtRDPPort">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credaddform.controls['txtRDPPort'].hasError('required') && credaddform.controls['txtRDPPort'].touched" class="warn-text">
+            Enter The Value.
+         </small>
+         <br>
+   
+         <mat-form-field class="example-full-width">
+            <mat-label>User Name</mat-label>
+            <input matInput type="text" placeholder="Enter User name" [(ngModel)]="credAddUsername" formControlName="txtUsername">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credaddform.controls['txtUsername'].hasError('required') && credaddform.controls['txtUsername'].touched" class="warn-text">
+            Enter the User Name.
+         </small>
+         <br>
+   
+         <mat-form-field class="example-full-width" *ngIf="credAddType != 'ARCON'">
+            <mat-label *ngIf="credAddType != 'SNMP v2c'">Password</mat-label>
+            <mat-label *ngIf="credAddType == 'SNMP v2c'">COMMUNITY STRING</mat-label>
+            <input matInput type="password" placeholder="Enter Password" [(ngModel)]="credAddpwd"  formControlName="txtPassword">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credaddform.controls['txtPassword'].hasError('required') && credaddform.controls['txtPassword'].touched" class="warn-text">
+            Enter the Password.
+         </small>
+         <br>
+   
+         <mat-form-field class="example-full-width" *ngIf="credAddType != 'ARCON'">
+            <mat-label *ngIf="credAddType != 'SNMP v2c'">Confirm Password</mat-label>
+            <mat-label *ngIf="credAddType == 'SNMP v2c'">CONFIRM COMMUNITY STRING</mat-label>
+            <input matInput type="password" placeholder="Enter Confirm Password" [(ngModel)]="credAddcpwd" formControlName="txtCPassword">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credaddform.controls['txtCPassword'].hasError('required') && credaddform.controls['txtCPassword'].touched" class="warn-text">
+            Enter the Correct Password.
+         </small>
+         <br>
+         <button mat-raised-button color="primary"  type="submit" [disabled]="!credaddform.valid" >Create User</button>
+      </form>
+   </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+ </ng-template>
+ <!-- CREATE MODEL END -->
+
+<!-- Cred update Modal start-->
+<ng-template #credupdatemodal let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">CRED Update Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <div class="modal-body">
+      <form [formGroup]="credupdateform" (ngSubmit)="submitCredUpdate()">
+         <mat-form-field class="example-full-width">
+            <mat-label>CRED Name</mat-label>
+            <input matInput placeholder="Enter CRED Name" [(ngModel)]="credUpName" formControlName="txtupcredname">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credupdateform.controls['txtupcredname'].hasError('required') && credupdateform.controls['txtupcredname'].touched" class="warn-text">
+            Enter the CRED Name.
+         </small>
+         <br>
+         
+         <mat-form-field class="example-full-width">
+            <mat-label>User Name</mat-label>
+            <input matInput placeholder="Enter User name" [(ngModel)]="credUpUsername" formControlName="txtupusername">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credupdateform.controls['txtupusername'].hasError('required') && credupdateform.controls['txtupusername'].touched" class="warn-text">
+            Enter the Username.
+         </small>
+         <br>
+   
+         <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Enter Password" [(ngModel)]="credUppwd" formControlName="txtupPassword">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credupdateform.controls['txtupPassword'].hasError('required') && credupdateform.controls['txtupPassword'].touched" class="warn-text">
+            Enter the Password.
+         </small>
+         <br>
+   
+         <mat-form-field class="example-full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput placeholder="Enter Confirm Password" [(ngModel)]="credUpcpwd" formControlName="txtupCPassword">
+         </mat-form-field>
+         <small class="gene-block" *ngIf="credupdateform.controls['txtupCPassword'].hasError('required') && credupdateform.controls['txtupCPassword'].touched" class="warn-text">
+            Enter the Correct Password.
+         </small>
+         <br>
+         <button mat-raised-button color="primary" type="submit" [disabled]="!credupdateform.valid" >Create User</button>
+
+      </form>
+      
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+ </ng-template>
+ <!-- Cred Update model end -->

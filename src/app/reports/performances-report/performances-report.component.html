@@ -1,0 +1,144 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+	<mat-card>
+		<div class="gene-card-title">
+			<div fxLayout="row" fxLayoutAlign="start center" style="text-align: right;">
+			   	<div fxLayout="column">
+				  <!-- <h3>{{'Checkbox'|translate}}</h3> -->
+				  
+			   	</div>
+			   	<span fxFlex></span>
+					<button mat-raised-button mat-button-sm color="primary" *ngIf="checkDataStatus == true" (click)="expertToPdf()">
+						PDF <mat-icon>file_download</mat-icon>
+					</button>  
+					<button mat-raised-button mat-button-sm color="primary" *ngIf="checkDataStatus == true" (click)="expertTableCsv()">
+						CSV <mat-icon>file_download</mat-icon>
+					</button>
+			</div>
+			<mat-divider></mat-divider>
+		</div>
+		<div class="gene-card-content">
+			<div class="reportMain">
+				<div fxLayout="row wrap" fxLayoutAlign="space-between center">
+					<div fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100" fxFlex.gt-md="15">
+						<mat-form-field>
+							<mat-select placeholder="Select Category" (ngModelChange)="selectCategory($event)" [(ngModel)]="SelectedCategory">
+								<mat-option *ngFor="let srv of ListCategory | keyvalue" [value]="srv.key">
+									{{srv.key}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100" fxFlex.gt-md="15" *ngIf="showSubCategory == true">
+						<mat-form-field >
+							<mat-select placeholder="Select Sub Category" (ngModelChange)="selectSubCategory($event)"
+								[(ngModel)]="SelectedSubCategory">
+								<mat-option *ngFor="let srv of subCategoryValues" [value]="srv">
+									{{srv}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100" fxFlex.gt-md="15">
+						<mat-form-field>
+							<mat-select placeholder="Select Object" (ngModelChange)="selectObject($event)" [(ngModel)]="SelectedObjectVals">
+								<mat-option *ngFor="let srv of ObjectVals" [value]="srv">
+									{{srv}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100" fxFlex.gt-md="15">
+						<mat-form-field>
+							<mat-select placeholder="Select Metrics" (ngModelChange)="selectMetrics($event)" [(ngModel)]="SelectedMetricsVals">
+								<mat-option *ngFor="let srv of MetricsVals" [value]="srv">
+									{{srv}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100" fxFlex.gt-md="15">
+						<mat-form-field>
+							<input matInput [matDatepicker]="picker" (dateInput)="addEvent('input', $event)"
+								(dateChange)="addEvent('change', $event)">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+						</mat-form-field>	
+					</div>
+					<div fxFlex.gt-sm="15" fxFlex.gt-xs="15" fxFlex="100" fxFlex.gt-md="15">
+						<mat-form-field>
+							<input matInput [matDatepicker]="picker1" (dateInput)="addEvent2('input', $event)"
+								(dateChange)="addEvent2('change', $event)">
+							<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+							<mat-datepicker #picker1></mat-datepicker>
+						</mat-form-field>
+					</div>
+					<div fxFlex.gt-sm="10" fxFlex.gt-xs="10" fxFlex="100" fxFlex.gt-md="10">
+						<div class="example-button-row">
+							<button mat-raised-button color="primary" (click)="getDetails()">Get</button>
+						</div>
+					</div>
+				</div>
+				<p class="mt4" *ngIf="checkDataStatus == false"> No Data... ( ) </p>
+				<div class="tableSection mt4" *ngIf="checkDataStatus == true" id="content-wrapper">
+					<div class="chart-wrapper">
+						<canvas baseChart height="80" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+							[legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+					</div>
+					<div class="row">
+						<!-- <div class="col-md-12">
+							<mat-divider></mat-divider>
+						</div> -->
+						<div class="col-md-4">
+							<h3>Average</h3>
+							<table class="table">
+								<tbody>
+									<tr *ngFor="let avg of performaceAverage | keyvalue">
+										<td>{{avg.key}} : {{avg.value}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-4">
+							<h3>Sum</h3>
+							<table class="table">
+								<tbody>
+									<tr *ngFor="let sum of performaceSum | keyvalue">
+										<td>{{sum.key}} : {{sum.value}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-4">
+							<h3>High Low</h3>
+							<table class="table">
+								<tbody>
+									<tr *ngFor="let LowHigh of performaceLowHigh | keyvalue">
+										<td>{{LowHigh.key}} : Low: {{LowHigh.value.low }} Hight: {{LowHigh.value.high }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- <div class="col-md-12">
+							<mat-divider></mat-divider>
+						</div> -->
+						<div class="col-md-12">
+							<h3>Row Data</h3>
+							<table class="table">
+								<thead>
+									<tr>
+										<th *ngFor="let plots of Tableheader">{{plots}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let body of Tablebody">
+										<td *ngFor="let b of body">{{b}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</mat-card>
+</div>

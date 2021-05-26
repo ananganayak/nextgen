@@ -1,0 +1,461 @@
+[{
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD USER CREATION",
+	"icon": "assets/img/ad/AD-User-Creation.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD USER DELETION",
+	"icon": "assets/img/ad/AD-User-deletion.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD ACCOUNT UNLOCK",
+	"icon": "assets/img/ad/AD-Account-Unlock.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD PASSWORD RESET",
+	"icon": "assets/img/ad/AD-Password-Reset.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD CREATE OU",
+	"icon": "assets/img/ad/AD-OU-Create.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD CREATE GROUP",
+	"icon": "assets/img/ad/AD-Group-Create.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD MOVE USER TO GROUP",
+	"icon": "assets/img/ad/AD-User-To-Group.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD MOVE USER TO OU",
+	"icon": "assets/img/ad/AD-User-To-OU.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD USER MODIFICATION",
+	"icon": "assets/img/ad/AD-User-Modification.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD DISABLE USER ACCOUNT",
+	"icon": "assets/img/ad/AD-User-DISABLE.png"
+}, {
+	"category": "ACTIVE DIRECTORY",
+	"name": "AD ENABLE USER ACCOUNT",
+	"icon": "assets/img/ad/AD-User-Enable.png"
+}, {
+	"category": "MICROSOFT EXCHANGE",
+	"name": "USER CREATION WITH MAILBOX ACCOUNT",
+	"icon": "assets/img/ad/User-Creation-With-Mailbox.png"
+}, {
+	"category": "MICROSOFT EXCHANGE",
+	"name": "SET MAILBOX QUOTA FOR USER",
+	"icon": "assets/img/ad/Set-Mailbox-Quota.png"
+}, {
+	"category": "MICROSOFT EXCHANGE",
+	"name": "INCREASE MAILBOX SIZE",
+	"icon": "assets/img/ad/Increases-Mailbox-Size.png"
+}, {
+	"category": "MICROSOFT EXCHANGE",
+	"name": "DECREASE MAILBOX SIZE",
+	"icon": "assets/img/ad/Decrease-Mailbox-Size.png"
+}, {
+	"category": "MICROSOFT EXCHANGE",
+	"name": "DISABLE MAILBOX FOR USER",
+	"icon": "assets/img/ad/Disable-User-Mailbox.png"
+}, {
+	"category": "MICROSOFT EXCHANGE",
+	"name": "ENABLE MAILBOX FOR USER",
+	"icon": "assets/img/ad/Enable-User-Mailbox.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CREATE USER ACCOUNT",
+	"icon": "assets/img/ad/User-Account-Creation.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "DELETE USER ACCOUNT",
+	"icon": "assets/img/ad/User-Account-Delete.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK FILE AGE",
+	"icon": "assets/img/ad/Check-File-Age.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK FILE SIZE",
+	"icon": "assets/img/ad/Check-File-Size.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CREATE DIRECTORY",
+	"icon": "assets/img/ad/Create-Directory.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "DELETE DIRECTORY",
+	"icon": "assets/img/ad/Delet-Directory.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHANGE PERMISSIONS TO DIRECTORY",
+	"icon": "assets/img/ad/Change-Permission-To-Directory.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHANGE PERMISSIONS TO FILE",
+	"icon": "assets/img/ad/Change-Permission-To-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "ARCHIVE A FOLDER (TAR)",
+	"icon": "assets/img/ad/Archive-Tar.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "ARCHIVE A FOLDER (TAR.GZ)",
+	"icon": "assets/img/ad/Archive-Tar-Gz.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "UNARCHIVE A FILE(TAR.GZ)",
+	"icon": "assets/img/ad/Unarchive-Tar-Gz.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "UNARCHIVE A FILE(TAR)",
+	"icon": "assets/img/ad/Unarchive-Tar.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "BACKUP A MOUNTPOINT(DD)",
+	"icon": "assets/img/ad/Change-Ownership-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "RESTORE A MOUNTPOINT(DD)",
+	"icon": "assets/img/ad/Change-Ownership-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHANGE OWNERSHIP TO FILE / FOLDER",
+	"icon": "assets/img/ad/Change-Ownership-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK TOP 5 PROCESS CONSUMING MORE CPU",
+	"icon": "assets/img/ad/Change-Ownership-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK TOP 5 PROCESS CONSUMING MORE MEM",
+	"icon": "assets/img/ad/Change-Ownership-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "RESTART A MACHINE",
+	"icon": "assets/img/ad/Restart-System.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "START A SERVICE",
+	"icon": "assets/img/ad/Start-Service.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "RESTART A MACHINE",
+	"icon": "assets/img/ad/Stop-Service.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK SERVICE STATUS",
+	"icon": "assets/img/ad/Check-Status-Service.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "RESTART A SERVICE",
+	"icon": "assets/img/ad/Restart-Servies.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "KILL PROCESS WITH PID",
+	"icon": "assets/img/ad/Kill-Process.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK FILE EXISTENCE",
+	"icon": "assets/img/ad/File-Check.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK FOLDER EXISTENCE",
+	"icon": "assets/img/ad/Folder-Check.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CREATE A FILE",
+	"icon": "assets/img/ad/Create-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "READ FILE CONTENTS",
+	"icon": "assets/img/ad/Read-File-Content.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "DELETE A FILE",
+	"icon": "assets/img/ad/Delete-File.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CLEAR TMP FOLDER",
+	"icon": "assets/img/ad/Clear-TMP.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "YUM INSTALL A PACKAGE FROM INTERNET",
+	"icon": "assets/img/ad/Package-Installer.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "REMOVE PACKAGE FROM SYSTEM",
+	"icon": "assets/img/ad/Remove-Package.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "CHECK FOR SOFTWARE EXISTENCE",
+	"icon": "assets/img/ad/Check-Software.png"
+}, {
+	"category": "CENTOS / RHEL",
+	"name": "LIST ALL SOFTWARES",
+	"icon": "assets/img/ad/List-Software.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CREATE LOCAL USER ACCOUNT",
+	"icon": "assets/img/ad/Create-Local-User-Account.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CREATE LOCAL USER ACCOUNT WITH ADMIN",
+	"icon": "assets/img/ad/CREATE-LOCAL-USER-ACCOUNT-WITH-ADMIN.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHECK SERVICE STATUS",
+	"icon": "assets/img/ad/CHECK-SERVICE-STATUS.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "START A SERVICE ",
+	"icon": "assets/img/ad/WIN-START-A-SERVICE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "STOP A SERVICE ",
+	"icon": "assets/img/ad/WIN-STOP-A-SERVICE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "RESTART A SERVICE",
+	"icon": "assets/img/ad/WIN-RESTART-A-SERVICE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHECK SERVICE EXISTENCE",
+	"icon": "assets/img/ad/WIN-RESTART-A-SERVICE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "LIST INSTALLED SOFTWARES",
+	"icon": "assets/img/ad/WIN-LIST-INSTALLED-SOFTWARES.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CREATE DIRECTORY",
+	"icon": "assets/img/ad/WIN-CREATE-DIRECTORY.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "DELETE DIRECTORY",
+	"icon": "assets/img/ad/WIN-DELETE-DIRECTORY.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "ZIP A FOLDER ",
+	"icon": "assets/img/ad/WIN-ZIP-A-FOLDER.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "UNZIP A FOLDER",
+	"icon": "assets/img/ad/WIN-UNZIP-A-FOLDER.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHECK DISK SIZE",
+	"icon": "assets/img/ad/WIN-CHECK-DISK-SIZE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHECK FOLDER SIZE",
+	"icon": "assets/img/ad/WIN-CHECK-FOLDER-SIZE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHECK FILE EXISTENCE",
+	"icon": "assets/img/ad/WIN-CHECK-FILE-EXISTENCE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHECK FILE AGE",
+	"icon": "assets/img/ad/WIN-CHECK-FILE-AGE.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHECK FILE PERMISSIONS",
+	"icon": "assets/img/ad/WIN-CHECK-FILE-PERMISSIONS.png"
+}, {
+	"category": "MICROSOFT WINDOWS",
+	"name": "CHANGE FILE PERMISSIONS",
+	"icon": "assets/img/ad/WIN-CHANGE-FILE-PERMISSIONS.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL CREATE DATABASE",
+	"icon": "assets/img/ad/Mysql-Create.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL DROP DATABASE",
+	"icon": "assets/img/ad/Mysql-Drop.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL CREATE USER",
+	"icon": "assets/img/ad/Mysql-User-Create.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL GRANT USER TO DB",
+	"icon": "assets/img/ad/Mysql-User-DB.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL RESET PASSWORD FOR USER",
+	"icon": "assets/img/ad/Mysql-User-Password-Reset.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL CHANGE DB OWNERSHIP TO USER",
+	"icon": "assets/img/ad/Mysql-Owner-To-User.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL READ TABLES",
+	"icon": "assets/img/ad/Mysql-Read-Table.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL CREATE TABLE",
+	"icon": "assets/img/ad/Mysql-Create-Table.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL TRUNCATE TABLE",
+	"icon": "assets/img/ad/Mysql-Truncate-Table.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL BACKUP DB",
+	"icon": "assets/img/ad/Mysql-Backup-Table.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL RESTORE DB",
+	"icon": "assets/img/ad/Mysql-Restore-Table.png"
+}, {
+	"category": "MYSQL",
+	"name": "MySQL DROP TABLE",
+	"icon": "assets/img/ad/MySQL-DROP-TABLE.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES CREATE DATABASE",
+	"icon": "assets/img/ad/Postgres-Create.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES DROP DATABASE",
+	"icon": "assets/img/ad/Postgres-Drop.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES CREATE USER",
+	"icon": "assets/img/ad/Postgres-Create-User.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES GRANT USER TO DB",
+	"icon": "assets/img/ad/Postgress-Guser-DB.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES RESET PASSWORD FOR USER",
+	"icon": "assets/img/ad/Postgres-User-Password-Reset.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES CHANGE DB OWNERSHIP TO USER",
+	"icon": "assets/img/ad/Postgres-Owner-To-User.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES READ TABLES",
+	"icon": "assets/img/ad/Postgres-Read-Table.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES CREATE TABLE",
+	"icon": "assets/img/ad/Postgres-Create-Table.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES TRUNCATE TABLE",
+	"icon": "assets/img/ad/Postgres-Truncate-Table.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES BACKUP DB",
+	"icon": "assets/img/ad/Postgres-Backup-Table.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES RESTORE DB",
+	"icon": "assets/img/ad/Postgres-Restore-Table.png"
+}, {
+	"category": "POSTGRES",
+	"name": "POSTGRES DROP TABLE",
+	"icon": "assets/img/ad/POSTGRES-DROP-TABLE.png"
+}, {
+	"category": "PROXMOX",
+	"name": "CREATE NEW CONTAINER WITH MINIMAL OPTIONS",
+	"icon": "assets/img/ad/Container-With-Minimal-Options.png"
+}, {
+	"category": "PROXMOX",
+	"name": "CREATE NEW CONTAINER DEFINING NETWORK WITH DHCP",
+	"icon": "assets/img/ad/Container-With-Network.png"
+}, {
+	"category": "PROXMOX",
+	"name": "CREATE NEW CONTAINER DEFINING NETWORK WITH STATIC IP",
+	"icon": "assets/img/ad/Container-With-Network.png"
+}, {
+	"category": "PROXMOX",
+	"name": "START A CONTAINER",
+	"icon": "assets/img/ad/Start-Container.png"
+}, {
+	"category": "PROXMOX",
+	"name": "STOP A CONTAINER",
+	"icon": "assets/img/ad/Stop-Container.png"
+}, {
+	"category": "PROXMOX",
+	"name": "STOP CONTAINER WITH FORCE",
+	"icon": "assets/img/ad/Force-Stop-Container.png"
+}, {
+	"category": "PROXMOX",
+	"name": "RESTART CONTAINER",
+	"icon": "assets/img/ad/Force-Restart-Container.png"
+}, {
+	"category": "PROXMOX",
+	"name": "REMOVE CONTAINER",
+	"icon": "assets/img/ad/Force-Remove-Container.png"
+}, {
+	"category": "PROXMOX",
+	"name": "CREATE A NEW VM",
+	"icon": "assets/img/ad/Vm-Create.png"
+}, {
+	"category": "PROXMOX",
+	"name": "CREATE A NEW VM WITH TWO NETWORK INTERFACE",
+	"icon": "assets/img/ad/Vm-Two-Network.png"
+}, {
+	"category": "PROXMOX",
+	"name": "CLONE A VM WITH TEMPLATE",
+	"icon": "assets/img/ad/Vm-Clone.png"
+}, {
+	"category": "PROXMOX",
+	"name": "START A VM",
+	"icon": "assets/img/ad/Vm-Start.png"
+}, {
+	"category": "PROXMOX",
+	"name": "STOP A VM",
+	"icon": "assets/img/ad/Vm-Stop.png"
+}, {
+	"category": "PROXMOX",
+	"name": "STOP VM WITH FORCE",
+	"icon": "assets/img/ad/Vm-Force-Start.png"
+}, {
+	"category": "PROXMOX",
+	"name": "RESTART VM",
+	"icon": "assets/img/ad/Vm-Restart.png"
+}, {
+	"category": "PROXMOX",
+	"name": "REMOVE VM",
+	"icon": "assets/img/ad/Vm-Force-Remove.png"
+}, {
+	"category": "PROXMOX",
+	"name": "GET VM CURRENT STATE",
+	"icon": "assets/img/ad/Vm-Force-Current-State.png"
+}, {
+	"category": "MONGO",
+	"name": "MONGO CREATE DATABASE",
+	"icon": "assets/img/ad/Mongodb-Create.png"
+}, {
+	"category": "MONGO",
+	"name": "MONGO CREATE COLLECTION",
+	"icon": "assets/img/ad/Mongodb-Collection-Create.png"
+}, {
+	"category": "MONGO",
+	"name": "MONGO GET QUERY DATA",
+	"icon": "assets/img/ad/Mango-Query-Data.png"
+}, {
+	"category": "MONGO",
+	"name": "BACKUP MONGO DB",
+	"icon": "assets/img/ad/Mango-Backup.png"
+}, {
+	"category": "MONGO",
+	"name": "RESTORE MONGO DB",
+	"icon": "assets/img/ad/Mango-Restore.png"
+}, {
+	"category": "MONGO",
+	"name": "CHECK MONGO CONNECTIVITY",
+	"icon": "assets/img/ad/Mango-Connectivity.png"
+}]

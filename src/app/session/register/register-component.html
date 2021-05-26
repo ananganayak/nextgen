@@ -1,0 +1,108 @@
+<div class="gene-registration-form gene-session pad-y-xl">
+   <div fxLayout="row" fxLayoutAlign="center center">
+      <div fxLayout="column" fxFlex.xl="600px" fxFlex.lg="600px" fxFlex.md="600px" fxFlex.sm="600px" fxFlex.xs="100">
+         <mat-card>
+            <div>
+               <div fxLayout="column" fxLayoutAlign="center center">
+                  <div class="login-logo text-center">
+                     <img src="assets/img/logo.png">
+                     <h5 class="">{{'Please Enter your details for registrations'|translate}}</h5>
+                  </div>
+               </div>
+
+               <form #form="ngForm" (ngSubmit)="register(form.value)">
+
+                  <div fxLayout="column" fxLayoutAlign="start stretch">
+
+                     <div class="div" *ngIf="next1val != true">
+         
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Work Mail" type="text" name="name" required [(ngModel)]="name">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="User Name" type="text" name="email" required
+                              [(ngModel)]="email">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Fisrt Name" type="password" name="password" required
+                              [(ngModel)]="password">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Last Name" type="password" name="password-confirm" required
+                              [(ngModel)]="passwordConfirm">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Phone Number" type="password" name="password-confirm" required
+                              [(ngModel)]="passwordConfirm">
+                        </mat-form-field>
+
+
+                        <button mat-raised-button type="button" class="primary-bg mrgn-b-md"
+                           (click)="next1()">NEXT</button>
+                     </div>
+
+                     <div class="div" *ngIf="next1val == true">
+                      
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Company Name" type="text" name="name" required
+                              [(ngModel)]="name">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Number of Employees" type="text" name="email" required
+                              [(ngModel)]="email">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Your Autointelli subdomain" type="password" name="password"
+                              required [(ngModel)]="password">
+                        </mat-form-field>
+
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Create Password" type="password" name="password-confirm"
+                              required [(ngModel)]="passwordConfirm">
+                        </mat-form-field>
+
+                        <button mat-raised-button type="button" class="primary-bg mrgn-b-md"
+                           (click)="back()">BACK</button>
+
+                        <button mat-raised-button [disabled]="!form.valid" class="primary-bg mrgn-b-md">CREATE
+                           ACCOUNT</button>
+
+                        <p>Already have an account? <a [routerLink]="['/session/login']" class="primary-text">Sign in
+                              here</a></p>
+                     </div>
+
+
+                     <!-- <div class="div" *ngIf="next1val == true">
+                        <p>test 2</p>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Name" type="text" name="name" required [(ngModel)]="name">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="E-Mail" type="text" name="email" required [(ngModel)]="email">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Password" type="password" name="password" required
+                              [(ngModel)]="password">
+                        </mat-form-field>
+                        <mat-form-field class="full-wid mrgn-b-sm">
+                           <input matInput placeholder="Password (Confirm)" type="password" name="password-confirm"
+                              required [(ngModel)]="passwordConfirm">
+                        </mat-form-field>
+                     </div> -->
+
+
+
+
+
+                  </div>
+
+
+
+
+               </form>
+
+            </div>
+         </mat-card>
+      </div>
+   </div>
+</div>

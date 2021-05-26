@@ -1,0 +1,40 @@
+<h2>ARCON Details</h2>
+
+<div class="smtp">
+	
+	<mat-form-field class="example-full-width">
+		<mat-label>Communication Type</mat-label>
+		<mat-select  [(ngModel)]="communication_type">
+			<mat-option *ngFor="let type of communicationTypData | keyvalue" [value]="type.value">{{type.value}}</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<br>
+
+	<mat-form-field class="example-full-width">
+		<mat-label>Arcon IP</mat-label>
+		<input matInput placeholder="Enter LDAP IP" [(ngModel)]="arconip">
+	</mat-form-field>
+	<br>
+
+	<mat-form-field class="example-full-width">
+		<mat-label>Arcon Port</mat-label>
+		<input matInput placeholder="Enter LDAP Port" [(ngModel)]="arconport">
+	</mat-form-field>
+	<br>
+
+	<mat-form-field class="example-full-width">
+		<mat-label>Arcon User</mat-label>
+		<input matInput placeholder="Enter Base DN" [(ngModel)]="arconuser">
+	</mat-form-field>
+	<br>
+
+	<mat-form-field class="example-full-width">
+		<mat-label>Arcon Password</mat-label>
+		<input type="password" matInput placeholder="Enter Password" [(ngModel)]="arconpwd">
+	</mat-form-field>
+	<br>
+
+<br><br>
+	<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+
+</div>

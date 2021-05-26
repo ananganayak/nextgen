@@ -1,0 +1,92 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+        <div class="mrgn-l-md mrgn-b-md add-user-btn" fxLayoutAlign="start center">
+         <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter the IP Range" [disabled]="discoverIpInput" id="discoverIpInput" [(ngModel)]="disIpRange">
+         </mat-form-field>
+        </div>
+         <div class="mrgn-l-md mrgn-b-md add-user-btn" fxLayoutAlign="start center">
+            <mat-card-actions class="mat-pad-none margin-none">
+               <button mat-raised-button mat-button-sm color="primary" [disabled]="discoveryBtn" id="discoveryBtn" (click)="discoverFn()">Start Discovery</button>
+            </mat-card-actions>
+         </div>
+      </div>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>Discovery Details</h4>
+            </div><span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+      <div class="gene-card-content pad-t-none">
+         <div class="table-responsive" style="margin-top: 25px;">
+            <table class="table table-bordered table-middle th-fw-light mb-0">
+               <thead style="background-color: #efefef;">
+                  <tr>
+                     <th>S.No</th>
+                     <th>IP Host Name</th>
+                     <th>OS Family</th>
+                     <th>Credential</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let item of disList">
+                     <td>{{item.discovery_id}}</td>
+                     <td>{{item.ip_address}}</td>
+                     <td>{{item.operating_system}}</td>
+                     <td>
+                       <button mat-icon-button color="primary" (click)="changeCredName(disCredChangeModal, item.cred_name, item.ip_address)">{{item.cred_name}}</button>
+                     </td>
+                     <td>
+                       <div class="example-button-row" color="primary">
+                           <!-- <button mat-icon-button >
+                             <mat-icon (click)="disCredSave()">save</mat-icon>
+                           </button> -->
+                           <button mat-icon-button >
+                             <mat-icon (click)="disDeattach(item.ip_address)">cancel</mat-icon>
+                           </button>
+                           <button mat-icon-button>
+                             <mat-icon (click)="disDelete(item.ip_address)">delete</mat-icon>
+                           </button>
+                         </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </mat-card>
+</div>
+
+<!-- Cred update Modal start-->
+<ng-template #disCredChangeModal let-modal>
+  <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">CRED Name Update Modal</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+     </button>
+  </div>
+  <div class="modal-body">
+     <mat-form-field>
+        <mat-label>IP Address</mat-label>
+        <input matInput disabled [(ngModel)]="disUpIP">
+     </mat-form-field>
+     <br>
+     <mat-form-field>
+        <mat-label>Credential Name</mat-label>
+     <select matNativeControl required [(ngModel)]="selDisUpCredName">
+        <option value="" selected>--Select--</option>
+        <option *ngFor="let row of disCredMasterList" [value]="row[1]">{{row[1]}}</option>
+     </select>
+  </mat-form-field>
+     <br>
+  </div>
+  <div class="modal-footer">
+      <button mat-raised-button color="primary" (click)="submitDisCreateUpdate()">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+<!-- Cred Update model end -->

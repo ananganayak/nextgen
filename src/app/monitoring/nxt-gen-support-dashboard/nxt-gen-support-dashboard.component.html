@@ -1,0 +1,85 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: left; width:70%">
+         <div class="mrgn-b-md add-user-btn" fxLayoutAlign="start center" style=" width:100%">
+            <mat-card-actions class="mat-pad-none margin-none"  style="float: left; width:100%">
+               <button mat-raised-button mat-button-sm color="warn" (click)="btnGetGridList(0)">
+                  Critical
+                  <!-- <mat-icon class="mrgn-l-md gene-text-xl">warning</mat-icon> -->
+               </button>
+               <button mat-raised-button mat-button-sm (click)="btnGetGridList(1)"
+                  style="background-color: #FFC107 !important; color: #fff !important; border-color: #FFC107 !important;">
+                  Warning
+                  <!-- <mat-icon class="mrgn-l-md gene-text-xl">warning</mat-icon> -->
+               </button>
+            </mat-card-actions>
+            <mat-form-field class="mrgn-l-md" >
+               <mat-select placeholder="Select Service" (ngModelChange)="selectCategory($event)"
+                  [(ngModel)]="selcategrp" name="Service Category">
+                  <mat-option *ngFor="let srv of serviceval" [value]="srv.value">
+                     {{srv.name}}
+                  </mat-option>
+               </mat-select>
+            </mat-form-field>
+         </div>
+      </div>
+      <div class="row wrap" fxLayoutAlign="space-between" style="float: right;" >
+         <div class="example-button-row">
+            <button mat-raised-button mat-button-sm color="primary" (click)="expertTableCsv()">
+              CSV <mat-icon>file_download</mat-icon>
+            </button>
+         </div>
+      </div>
+      <!-- <div class="gene-card-title">
+          <div fxLayout="row" fxLayoutAlign="start center">
+             <div fxLayout="column">
+                <h4>NxtGen Support Dashboard</h4>
+             </div>
+             <span fxFlex></span>
+          </div>
+          <mat-divider></mat-divider>
+       </div> -->
+       <div class="gene-card-content pad-t-none">
+          <div class="table-responsive" style="margin-top: 25px;">
+             <table class="table table-bordered table-middle th-fw-light mb-0">
+                <thead style="background-color: #efefef;">
+                   <tr>
+                      <th>S.No</th>
+                      <th sortable="host">VM Name</th>
+                      <th>Address</th>
+                      <th>Service</th>
+                      <th>Status</th>
+                      <th>Status Information</th>
+                      <th sortable="since">Since</th>
+                      <th>Action</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr *ngFor="let item of gridList; index as i">
+                      <td>{{i + 1}}</td>
+                      <td>{{item[0]}}</td>
+                      <td>{{item[1]}}</td>
+                      <td>{{item[2]}}</td>
+                      <td>
+                        <mat-chip-list>
+                           <mat-chip
+                              [ngClass]="{'label-warning': item[3] =='WARNING', 'label-success': item[3] == 'OK', 'label-info': item[3] == 'UNKNOWN', 'label-danger': item[3] == 'CRITICAL'}"
+                              selected> {{item[3]}}</mat-chip>
+                        </mat-chip-list>
+                     </td>
+                     <td>{{item[4]}}</td>
+                     <td>{{item[5]}}</td>
+                     <td>
+                        <div class="example-button-row">
+                           <button mat-icon-button color="primary" (click)="onAction()">
+                              <mat-icon>launch</mat-icon>
+                           </button>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </mat-card>
+</div>

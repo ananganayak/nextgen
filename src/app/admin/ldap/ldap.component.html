@@ -1,0 +1,46 @@
+<h2>LDAP Details</h2>
+
+<div class="smtp">
+	
+	<mat-form-field class="example-full-width">
+		<mat-label>Communication Type</mat-label>
+		<mat-select  [(ngModel)]="communication_type">
+			<mat-option *ngFor="let type of communicationTypData | keyvalue" [value]="type.value">{{type.value}}</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<br>
+
+	<mat-form-field class="example-full-width">
+		<mat-label>LDAP IP</mat-label>
+		<input matInput placeholder="Enter LDAP IP" [(ngModel)]="ldapIp">
+	</mat-form-field>
+	<br>
+
+	<mat-form-field class="example-full-width">
+		<mat-label>LDAP Port</mat-label>
+		<input matInput placeholder="Enter LDAP Port" [(ngModel)]="ldapPort">
+	</mat-form-field>
+	<br>
+
+	<mat-form-field class="example-full-width">
+		<mat-label>Base DN</mat-label>
+		<input matInput placeholder="Enter Base DN" [(ngModel)]="baseDn">
+	</mat-form-field>
+	<br>
+
+	<p> <b> System Account </b></p>
+	<mat-form-field class="example-full-width">
+		<mat-label>Account</mat-label>
+		<input matInput placeholder="Enter Account" [(ngModel)]="account">
+	</mat-form-field>
+	<br>
+	<mat-form-field class="example-full-width">
+		<mat-label>Password</mat-label>
+		<input type="password" matInput placeholder="Enter Password" [(ngModel)]="password">
+	</mat-form-field>
+	<br>
+
+<br><br>
+	<button mat-raised-button color="primary" (click)="submit()">Submint</button>
+
+</div>

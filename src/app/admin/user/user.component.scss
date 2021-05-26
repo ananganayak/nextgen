@@ -1,0 +1,43 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.actionBtn {
+  background-color: #efefef;
+  display: block;
+  text-align: center;
+  margin: 2px;
+  border-radius: 3px;
+  padding: 5px 0px;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.actionBtn:hover {
+  background-color: #dadada;
+}
+
+
+.userTable {
+	width: 100%;
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
+.tableLoding {
+	img{
+		width: 50px;
+    display: block;
+    margin: 0 auto;
+	}
+}

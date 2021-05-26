@@ -1,0 +1,46 @@
+
+
+<mat-card>
+	<mat-card-title>SMTP Details</mat-card-title>
+<div class="smtp">
+<mat-form-field class="mrgn-l-md">
+<mat-label>Communication Types</mat-label>
+<mat-select matNativeControl required [(ngModel)]="communication_type"> 
+	<mat-option value="" selected></mat-option>
+	<mat-option *ngFor="let type of communicationTypes | keyvalue" [value]="type.value">{{type.value}}</mat-option>
+</mat-select>
+</mat-form-field>
+
+<br>
+<mat-form-field class="example-full-width">
+<mat-label>SMTP IP</mat-label>
+<input matInput placeholder="Enter SMTP IP" [(ngModel)]="smtpip">
+</mat-form-field>
+<br>
+
+<mat-form-field class="example-full-width">
+<mat-label>SMTP Port</mat-label>
+<input matInput placeholder="Enter SMTP Port" [(ngModel)]="smtpport">
+</mat-form-field>
+<br>
+
+<mat-checkbox class="example-margin" (change)="DoesYourServerNeedsAuthentication($event.checked)">Does your server
+needs Authentication ?</mat-checkbox>
+<br>
+
+<div *ngIf="showUserNameAndPassword == true" class="userPasswo">
+<mat-form-field class="example-full-width">
+	<mat-label>User Name</mat-label>
+	<input matInput placeholder="Enter User Name" [(ngModel)]="smtpuser">
+</mat-form-field>
+<br>
+<mat-form-field class="example-full-width">
+	<mat-label>Password</mat-label>
+	<input type="password" matInput placeholder="Enter Password" [(ngModel)]="smtppass">
+</mat-form-field>
+<br>
+</div>
+<br><br><br>
+<button mat-raised-button color="primary" (click)="submit()">Submit</button>
+</div>
+</mat-card>

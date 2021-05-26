@@ -1,0 +1,173 @@
+<div fxFlex.gt-sm="100" fxFlex.gt-xs="100" fxFlex="100">
+   <mat-card>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" style="float: right;">
+         <div class="mrgn-l-md mrgn-b-md add-user-btn  " fxLayoutAlign="start center">
+            <div class="form-group" style="float: right; margin-right: 15px; margin-top: -6px;">
+               <input type="text" class="form-control" placeholder="Search Here">
+               <!-- <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="searchpolicy"> -->
+
+            </div>
+
+         </div>
+      </div>
+      <div class="gene-card-title">
+         <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column">
+               <h4>Bots Repo</h4>
+            </div><span fxFlex></span>
+         </div>
+         <mat-divider></mat-divider>
+      </div>
+
+      <div class="container">
+         <div class="row">
+            <div class="col-3">
+
+               <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                  <!-- This is the tree node template for leaf nodes -->
+                  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                     <!-- use a disabled button to provide padding for tree leaf -->
+                     <button mat-icon-button disabled></button>
+                     <!-- <a (click)="onBotSelected(node)">{{node.name}}</a> -->
+                  </mat-tree-node>
+                  <!-- This is the tree node template for expandable nodes -->
+                  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+                     <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+                        <mat-icon class="mat-icon-rtl-mirror">
+                           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                        </mat-icon>
+                     </button>
+                     {{node.name}}
+                  </mat-tree-node>
+               </mat-tree>
+
+            </div>
+            <!-------------------------------------------------->
+            <div class="col-9 mat-card-wrapper">
+               <!--  cards here -->
+               <!-- <p>{{selectedBot}}</p> -->
+               <div *ngFor="let row of data">
+                  <mat-card>
+                     <mat-card-content>
+                        <div class="icon">
+                           <i class="fa  fa-file"></i>
+                        </div>
+                        <div class="file-name">
+                           <div class="pull-left">
+                              {{ row[1] }}
+                              <br>
+                              <span>Added: {{ row[3] }}</span>
+                           </div>
+                           <div class="pull-right">
+                              <a class="pull-left inline-block mr-15 bots_edit" href="#" data-id="{{ row[0] }}"
+                                 style="margin-top: 5px;font-size: 18px;">
+                                
+                                 <i class="fa fa-pencil-square-o txt-light" (click)="botsAddModalFn(NewBotScript)"></i>
+                              </a>
+                              <a class="pull-left inline-block mr-15 bots_delete" href="#" data-id="{{ row[0] }}"
+                                 style="margin-left: 10px;margin-top: 5px;font-size: 18px;">
+                                 <i class="fa fa-times-circle txt-light"></i>
+                              </a>
+                           </div>
+
+                        </div>
+                     </mat-card-content>
+                  </mat-card>
+               </div>
+            </div>
+         </div>
+      </div>
+   </mat-card>
+</div>
+
+<!-- modal Start-->
+
+<ng-template #NewBotScript let-modal>
+   <div class="modal-header">
+      <h4 class="modal-title" id="modal-1">New Bot Script 1</h4>
+      
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+         <span aria-hidden="true">&times;</span>
+      </button>
+
+   </div>
+   <div class="modal-body">
+      <div class="container">
+           <form >
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="txtbotname">BOT Name</label>
+                                    <input type="email" class="form-control" id="txtbotname" name="txtbotname" placeholder="Bot Name">
+                                </div>
+                            </div>
+                            <!-- <p>test data :{{allMenuBotLang}}</p> -->
+                            <div class="col-md-3">
+                                <div (click)="getBotRepoMastersfn()" class="form-group">
+                                    <label >BOT Lang</label>
+                                    <select  class="form-control" id="selBotLang" name="selBotLang">        
+                                         <option >Select Lang</option>                    
+                                       <option *ngFor="let val of allMenuBotLang" >{{val}}</option>   
+                                                                  
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" (click)="getBotRepoMastersfn()" (change)="getOsDatafn
+                                ($event.target.value)">
+                                    <label >Platform</label>
+                                    <select class="form-control" id="selBotPlatform" name="selBotPlatform" 
+                                    [(ngModel)]="allMenuBotPType" (ngModelChange)="OnPlatFormChange($event)">
+                                        <option value="">Select Platform</option>                   
+                                        <option *ngFor="let val of allMenuBotPType" >{{val}}</option>   
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" >
+                                    <label >OS Type</label>
+                                    <select class="form-control" id="selOsType" name="selOsType"> 
+                                        <option value="">Select OS Type</option>
+                                        <option *ngFor="let val of allMenuBotOsType" >{{val}}</option>   
+
+                                    </select>
+                                </div>
+                            </div>                            
+                        </div>    
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="txtbotargs">BOT Args</label>
+                                    <input type="text" class="form-control"  placeholder="BOT Args"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="txtbotname">Component</label>
+                                    <input type="text" class="form-control" id="txtBotComponent" name="txtbotcomponent" placeholder="Component">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Description</label>                                         
+                                    <textarea class="form-control" id="txtbotdesc" name="txtbotdesc" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="position: relative;height: 350px;">
+                                 <textarea id="w3review" name="w3review" rows="14" cols="150" style="background-color: black;">
+                                    {{editor}}
+                                    </textarea>
+                                </div>                                    
+                            </div>
+                        </div>
+                    </form>   
+      </div>
+  </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+   </div>
+</ng-template>
+<!-- Policy Engine End -->

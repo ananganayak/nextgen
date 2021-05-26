@@ -1,0 +1,162 @@
+<div class="monitoring-dashborad">
+   <div *ngIf="hostgroupdiv" fxLayout="row wrap" fxLayoutAlign="start stretch" >
+      <div fxFlex.gt-md="25%" fxFlex.gt-sm="25%" fxFlex="100" *ngFor="let rowsd of cardhostgpData">
+         <mat-card class="card-full-height card-full-width">
+            <div class="gene-card-title">
+               <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxLayout="column">
+                     <h4 class="mrgn-b-none" title="{{rowsd.hostgroup}}">{{rowsd.hostgroup}}</h4>
+                  </div> <span fxFlex></span>
+               </div>
+               <mat-divider></mat-divider>
+            </div>
+            <div class="gene-card-content crm-list-wrap">
+               <mat-list class="mat-pad-none">
+                  <mat-list-item >
+                     <div class="full-wid pad-b-sm pad-t-xs" fxLayout="row" fxLayoutAlign="space-between start">   
+                        <div fxFlex.gt-md="50%" fxFlex.gt-sm="50%" fxFlex="100">
+                          <h4 class="mrgn-b-none" mat-line>Host : {{rowsd.host_count}}</h4>
+                          <p><a [ngClass]="{'btn-success': rowsd.host_checks[0][1] == 'UP', 'btn-danger': rowsd.host_checks[0][1] == 'DOWN', 'btn-info': rowsd.host_checks[0][1] == 'UNREACHABLE', 'btn-default': rowsd.host_checks[0][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.host_checks[0][0], rowsd.host_checks[0][1], rowsd.host_checks[0][2], rowsd.hostgroup, 0)"> {{rowsd.host_checks[0][1]}} - {{rowsd.host_checks[0][2]}} </a></p>
+                          <p><a [ngClass]="{'btn-success': rowsd.host_checks[1][1] == 'UP', 'btn-danger': rowsd.host_checks[1][1] == 'DOWN', 'btn-info': rowsd.host_checks[1][1] == 'UNREACHABLE', 'btn-default': rowsd.host_checks[1][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.host_checks[1][0], rowsd.host_checks[1][1], rowsd.host_checks[1][2], rowsd.hostgroup, 0)"> {{rowsd.host_checks[1][1]}} - {{rowsd.host_checks[1][2]}} </a></p>
+                          <p><a [ngClass]="{'btn-success': rowsd.host_checks[2][1] == 'UP', 'btn-danger': rowsd.host_checks[2][1] == 'DOWN', 'btn-info': rowsd.host_checks[2][1] == 'UNREACHABLE', 'btn-default': rowsd.host_checks[2][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.host_checks[2][0], rowsd.host_checks[2][1], rowsd.host_checks[2][2], rowsd.hostgroup, 0)"> {{rowsd.host_checks[2][1]}} - {{rowsd.host_checks[2][2]}} </a></p>
+                          <p><a [ngClass]="{'btn-success': rowsd.host_checks[3][1] == 'UP', 'btn-danger': rowsd.host_checks[3][1] == 'DOWN', 'btn-info': rowsd.host_checks[3][1] == 'UNREACHABLE', 'btn-default': rowsd.host_checks[3][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.host_checks[3][0], rowsd.host_checks[3][1], rowsd.host_checks[3][2], rowsd.hostgroup, 0)"> {{rowsd.host_checks[3][1]}} - {{rowsd.host_checks[3][2]}} </a></p>
+                        </div>
+                        <div fxFlex.gt-md="50%" fxFlex.gt-sm="50%" fxFlex="100">
+                          <h4 class="mrgn-b-none" mat-line>Service : {{rowsd.service_count}}</h4>
+                          <p><a [ngClass]="{'btn-info': rowsd.service_checks[0][1] == 'UNKNOWN', 'btn-danger': rowsd.service_checks[0][1] == 'CRITICAL', 'btn-warning': rowsd.service_checks[0][1] == 'WARNING', 'btn-success': rowsd.service_checks[0][1] == 'OK', 'btn-default': rowsd.service_checks[0][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.service_checks[0][0], rowsd.service_checks[0][1], rowsd.service_checks[0][2], rowsd.hostgroup, 1)"> {{rowsd.service_checks[0][1]}} - {{rowsd.service_checks[0][2]}} </a></p>
+                          <p><a [ngClass]="{'btn-info': rowsd.service_checks[1][1] == 'UNKNOWN', 'btn-danger': rowsd.service_checks[1][1] == 'CRITICAL', 'btn-warning': rowsd.service_checks[1][1] == 'WARNING', 'btn-success': rowsd.service_checks[1][1] == 'OK', 'btn-default': rowsd.service_checks[1][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.service_checks[1][0], rowsd.service_checks[1][1], rowsd.service_checks[1][2], rowsd.hostgroup, 1)"> {{rowsd.service_checks[1][1]}} - {{rowsd.service_checks[1][2]}} </a></p>
+                          <p><a [ngClass]="{'btn-info': rowsd.service_checks[2][1] == 'UNKNOWN', 'btn-danger': rowsd.service_checks[2][1] == 'CRITICAL', 'btn-warning': rowsd.service_checks[2][1] == 'WARNING', 'btn-success': rowsd.service_checks[2][1] == 'OK', 'btn-default': rowsd.service_checks[2][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.service_checks[2][0], rowsd.service_checks[2][1], rowsd.service_checks[2][2], rowsd.hostgroup, 1)"> {{rowsd.service_checks[2][1]}} - {{rowsd.service_checks[2][2]}} </a></p>
+                          <p><a [ngClass]="{'btn-info': rowsd.service_checks[3][1] == 'UNKNOWN', 'btn-danger': rowsd.service_checks[3][1] == 'CRITICAL', 'btn-warning': rowsd.service_checks[3][1] == 'WARNING', 'btn-success': rowsd.service_checks[3][1] == 'OK', 'btn-default': rowsd.service_checks[3][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.service_checks[3][0], rowsd.service_checks[3][1], rowsd.service_checks[3][2], rowsd.hostgroup, 1)"> {{rowsd.service_checks[3][1]}} - {{rowsd.service_checks[3][2]}} </a></p>
+                          <p><a [ngClass]="{'btn-info': rowsd.service_checks[4][1] == 'UNKNOWN', 'btn-danger': rowsd.service_checks[4][1] == 'CRITICAL', 'btn-warning': rowsd.service_checks[4][1] == 'WARNING', 'btn-success': rowsd.service_checks[4][1] == 'OK', 'btn-default': rowsd.service_checks[4][1] == 'PENDING'}" (click)="getDashDetails(rowsd, rowsd.service_checks[4][0], rowsd.service_checks[4][1],  rowsd.service_checks[4][2], rowsd.hostgroup, 1)"> {{rowsd.service_checks[4][1]}} - {{rowsd.service_checks[4][2]}} </a></p>
+                       </div>
+                     </div>
+                  </mat-list-item>
+               </mat-list>
+            </div>
+         </mat-card>
+      </div>
+   </div>
+    
+   <div *ngIf="hostservdiv">
+      <div fxLayout="column">
+         <mat-card>
+            <div class="gene-card-title">
+               <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                  <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="70" fxFlex.lg="70" fxFlex.xl="70">
+                     <div class="pad-r-sm">
+                        <h2>{{hostgroup}}</h2>
+                     </div>
+                  </div>
+                  <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="30" fxFlex.lg="30" fxFlex.xl="30">
+                     <div fxLayout="row wrap" style="float: right;">
+                        <!-- <div class="form-group pad-r-md" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="calc(100% - 500px)" fxFlex.lg="calc(100% - 500px)" fxFlex.xl="calc(100% - 200px)">
+                           <mat-form-field class="full-wid" floatLabel="never">
+                              <input matInput placeholder="Search Projects">
+                           </mat-form-field>
+                        </div> -->
+                        <!-- <div class="contact-btn" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="200px" fxFlex.lg="200px" fxFlex.xl="200px">  -->
+                        <div class="contact-btn" > 
+                           <!-- <button class="mrgn-r-sm mrgn-b-sm" mat-raised-button color="primary">Search</button> -->
+                           <button mat-raised-button color="primary" (click)="backtoDashboard()">BACK</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxLayout="column">
+                     <h4 class="mrgn-b-none">{{hostgroup | translate }}</h4>
+                  </div>
+                  <span fxFlex></span>
+                  <button mat-icon-button>
+                     <mat-icon>sync</mat-icon>
+                  </button>
+                  <button mat-icon-button [matMenuTriggerFor]="options">
+                     <mat-icon>more_horiz</mat-icon>
+                  </button>
+               </div> -->
+               <mat-divider></mat-divider>
+            </div>
+            <div class="gene-card-content">
+               <div class="row">
+                  <div fxFlex.gt-md="50" fxFlex.gt-sm="50" fxFlex="100">
+                     <p>Host</p>
+                     <div class="buttongroup mrgn-b-md text-left">
+                        <button class="mrgn-b-xs" [ngClass]="{'btn-success': item[1] == 'UP', 'btn-danger': item[1] == 'DOWN', 'btn-info': item[1] == 'UNREACHABLE', 'btn-default':item[1] == 'PENDING'}" (click)="getBtnDashDetails(item[0], item[1], item[2], carhgdata.hostgroup, 0)" mat-raised-button *ngFor="let item of carhgdata.host_checks">{{item[1]}}-{{item[2]}}</button>
+                     </div>
+                  </div>
+                  <div fxFlex.gt-md="50" fxFlex.gt-sm="50" fxFlex="100">
+                     <p>Service</p>
+                     <div class="buttongroup mrgn-b-md text-left">
+                        <button class="mrgn-b-xs" [ngClass]="{'btn-info': item[1] == 'UNKNOWN', 'btn-danger': item[1] == 'CRITICAL', 'btn-warning': item[1] == 'WARNING', 'btn-success': item[1] == 'OK', 'btn-default': item[1] == 'PENDING'}" (click)="getBtnDashDetails(item[0], item[1], item[2], carhgdata.hostgroup, 1)" mat-raised-button *ngFor="let item of carhgdata.service_checks">{{item[1]}}-{{item[2]}}</button>
+                     </div>
+                  </div>
+               </div>
+               <mat-divider></mat-divider>
+               <div fxLayout="row">
+                  <div class="" *ngIf="hostdiv" style="width: 100%;">
+                     <table class="table table-bordered">
+                        <thead class="thead-light" style="background-color: #efefef;">
+                           <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Host Name</th>
+                              <th scope="col">Host Description</th>
+                              <th scope="col">Host Display Name</th>
+                              <th scope="col">Host Address</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr *ngFor="let rows of innergird; index as i">
+                              <td scope="row">{{ i + 1 }}</td>
+                              <td>{{ rows[0] }}</td>
+                              <td>{{ rows[1]}}</td>
+                              <td>{{ rows[2]}}</td>
+                              <td>{{ rows[3]}}</td>
+                           </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                  <!-- <mat-card fxFlex="100%" style="padding: 0;" >
+                     <ngx-datatable
+                        class="material fullscreen mrgn-all-md"
+                        style="top: 64px;width: calc(100% - 2rem)"
+                        [columnMode]="'force'"
+                        [headerHeight]="50"
+                        [footerHeight]="0"
+                        [rowHeight]="50"
+                        [scrollbarV]="true"
+                        [scrollbarH]="true"
+                        [rows]="innergird">
+                        <ngx-datatable-column name="Host Name" [width]="80"></ngx-datatable-column>
+                        <ngx-datatable-column name="Host Description" [width]="300"></ngx-datatable-column>
+                        <ngx-datatable-column name="Host Display Name"></ngx-datatable-column>
+                        <ngx-datatable-column name="Host Address"></ngx-datatable-column>
+                     </ngx-datatable>
+                  </mat-card> -->
+                  <div class="" *ngIf="servicediv" style="width: 100%;">
+                     <table class="table table-bordered">
+                        <thead class="thead-light" style="background-color: #efefef;">
+                           <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Host Name</th>
+                              <th scope="col">Service</th>
+                              <th scope="col">Status Information</th>
+                              <th scope="col">Since(days)</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr *ngFor="let rows of innergird; index as i">
+                              <td scope="row">{{ i + 1 }}</td>
+                              <td>{{ rows[0] }}</td>
+                              <td>{{ rows[1]}}</td>
+                              <td>{{ rows[2]}}</td>
+                              <td>{{ rows[3]}}</td>
+                           </tr>
+                        </tbody>
+                      </table>
+                  </div>
+               </div>
+            </div>
+         </mat-card>
+      </div>
+   </div>
+</div>
